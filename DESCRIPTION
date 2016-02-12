@@ -1,7 +1,7 @@
 Package: LumFilters2
 Type: Package
 Title: Optical filter combinator
-Version: 0.1
+Version: 1.0
 Date: 2016-01-19
 Author: David Strebler
 Maintainer: David Strebler <david.strebler@uni-koeln.de>
