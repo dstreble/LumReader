@@ -50,7 +50,7 @@ default_PMT <- function(
 
   for(i in 1: length(PMT.names)){
 
-    temp.path <- system.file("extdata", PMT.names[i],package="LumFilters2")
+    temp.path <- system.file("extdata", PMT.names[i],package="LumReader")
 
     temp.PMT <- import_PMT(temp.path)
 

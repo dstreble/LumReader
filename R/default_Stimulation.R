@@ -20,7 +20,7 @@ default_Stimulation <- function(
 
   all.stimulation.names <- vector()
   for(i in 1:length(all.file.names)){
-    if(grepl(".STI",all.file.names[i])){
+    if(grepl(".EXI",all.file.names[i])){
       all.stimulation.names <- c(all.stimulation.names,all.file.names[i])
     }
   }
@@ -32,7 +32,7 @@ default_Stimulation <- function(
     stop("[default_Stimulation] Error: Input 'names' is not of type 'characters'.")
 
   }else{
-    names <- paste(names,".STI",sep="")
+    names <- paste(names,".EXI",sep="")
   }
 
   stimulation.names <- vector()
@@ -50,7 +50,7 @@ default_Stimulation <- function(
 
   for(i in 1: length(stimulation.names)){
 
-    temp.path <- system.file("extdata", stimulation.names[i],package="LumFilters2")
+    temp.path <- system.file("extdata", stimulation.names[i],package="LumReader")
 
     temp.stimulation <- import_Stimulation(temp.path)
 

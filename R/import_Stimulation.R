@@ -1,6 +1,6 @@
 #' Function to import a Stimulation
 #'
-#' This function import the properties of a Stimulation previously saved in a .Stimulation file.
+#' This function import the properties of a Stimulation previously saved in a .EXI file.
 #' @param file.name
 #'  \link{character} name of the .FLT file containing the Stimulation properties.
 #'
@@ -33,10 +33,10 @@ import_Stimulation <- function(
   description <- strsplit(x = Stimulation.description,split = ": ")[[1]][2]
   new.description <- as.character(description)
 
-  temp.emission <- data[3]                    ## 3th line contains "Quantum emission (s) [nm ; %]:"
+  temp.emission <- data[3]                                    ## 3th line contains "Quantum emission (s) [nm ; u.a]:"
 
-  ## 4th-end line contain "[wavelength] ; [s]"
-  Stimulation.emission <- data[4:length(data)]
+  Stimulation.emission <- data[4:length(data)]                ## 4th-end line contain "[wavelength ; u.a]"
+
 
   new.emission <- matrix(nrow = length(Stimulation.emission),
                            ncol = 2)

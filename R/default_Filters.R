@@ -51,7 +51,7 @@ default_Filters <- function(
 
   for(i in 1: length(filter.names)){
 
-    temp.path <- system.file("extdata", filter.names[i],package="LumFilters2")
+    temp.path <- system.file("extdata", filter.names[i],package="LumReader")
 
     temp.filter <- import_Filter(temp.path)
 
