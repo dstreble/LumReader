@@ -5,12 +5,41 @@ Version: 0.1
 Date: 2016-01-19
 Author: David Strebler
 Maintainer: David Strebler <david.strebler@uni-koeln.de>
-Description: This package estimates the transmission of a combination of optical filters.
-It can also define the final detection windows of the PMT using these filters.
+Description: This package estimates the transmission of a combination of optical
+    filters. It can also define the final detection windows of the PMT using these
+    filters.
 License: GPL-3
 Encoding: UTF-8
 Depends:
     R (>= 2.0.0)
+Imports:
+    methods
 Collate:
-  'hello.R'
+    'Filter-class.R'
+    'create_Filter.R'
+    'import_Filter.R'
+    'export_Filter.R'
+    'plot_Filter.R'
+    'combine_Filters.R'
+    'FilterStack-class.R'
+    'create_FilterStack.R'
+    'add_Filter.R'
+    'remove_Filter.R'
+    'plot_FilterStack.R'
+    'default_Filters.R'
+    'PMT-class.R'
+    'create_PMT.R'
+    'import_PMT.R'
+    'export_PMT.R'
+    'default_PMT.R'
+    'plot_PMT.R'
+    'Stimulation-class.R'
+    'create_Stimulation.R'
+    'import_Stimulation.R'
+    'export_Stimulation.R'
+    'default_Stimulation.R'
+    'plot_Stimulation.R'
+    'Reader-class.R'
+    'create_Reader.R'
+    'plot_Reader.R'
 RoxygenNote: 5.0.1
