@@ -16,7 +16,7 @@ default_Stimulation <- function(
   names
 
 ){
-  all.file.names <- dir(system.file("extdata", package="LumFilters2"))
+  all.file.names <- dir(system.file("extdata", package="LumReader"))
 
   all.stimulation.names <- vector()
   for(i in 1:length(all.file.names)){

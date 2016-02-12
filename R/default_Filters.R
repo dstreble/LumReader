@@ -16,7 +16,7 @@ default_Filters <- function(
   names
 
 ){
-  all.file.names <- dir(system.file("extdata", package="LumFilters2"))
+  all.file.names <- dir(system.file("extdata", package="LumReader"))
 
   all.filter.names <- vector()
 

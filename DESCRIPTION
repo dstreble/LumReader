@@ -1,13 +1,11 @@
-Package: LumFilters2
+Package: LumReader
 Type: Package
-Title: Optical filter combinator
+Title: TL/OSL Reader simulator
 Version: 1.0
 Date: 2016-01-19
 Author: David Strebler
 Maintainer: David Strebler <david.strebler@uni-koeln.de>
-Description: This package estimates the transmission of a combination of optical
-    filters. It can also define the final detection windows of the PMT using these
-    filters.
+Description: This package estimates the detection windows of a TL/OSL reader based on the filters and the PMT selected. It also allows to check if the stimulation unit do not overlap with this detection windows. Finally, for those only interested by filter combination, it could provide the transmission property of a filter stack. The user can used the filters, PMT and stimulation unit already includes in the package or creates its own.
 License: GPL-3
 Encoding: UTF-8
 Depends:
