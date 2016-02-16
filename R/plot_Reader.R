@@ -20,7 +20,7 @@ plot_Reader <- function(
     stop("[plot_Reader] Error: Input 'object' is not of type 'Reader'.")
   }
 
-  colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet")
+  colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
 
 
   title <- object@name
@@ -29,28 +29,31 @@ plot_Reader <- function(
   PMT <- object@PMT
   filterStack <- object@filterStack
 
+  colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
+
   if(!is.null(filterStack)){
     filters <- filterStack@filters
     filter.result <- filterStack@result
-  }
-  if(!is.null(filterStack) && !is.null(PMT) && !is.null(stimulation)){
-    colors <- colors[1:(length(filters)+4)]
 
-  }else if(!is.null(filterStack) && !is.null(PMT)){
-    colors <- colors[1:(length(filters)+3)]
+    colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
 
-  }else if(!is.null(filterStack) && !is.null(stimulation)){
-    colors <- colors[1:(length(filters)+1)]
+    if(!is.null(PMT) && !is.null(stimulation)){
+      colors <- colors[1:(length(filters)+4)]
 
-  }else if(!is.null(PMT) && !is.null(stimulation)){
-    colors <- colors[1:3]
+    }else if(!is.null(PMT)){
+      colors <- colors[1:(length(filters)+3)]
 
-  }else if(!is.null(filterStack)){
-    colors <- colors[1:(length(filters)+1)]
+    }else if(!is.null(stimulation)){
+      colors <- colors[1:(length(filters)+2)]
+
+    }else{
+      colors <- colors[1:(length(filters)+1)]
+    }
 
   }else{
-    colors <- colors[1:3]
+    colors <- c("gray", "black", "red")
   }
+
 
 
   legend.text <- vector()

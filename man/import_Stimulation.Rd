@@ -13,7 +13,7 @@ import_Stimulation(file.name)
 The function creates a new \code{\linkS4class{Stimulation}} object.
 }
 \description{
-This function import the properties of a Stimulation previously saved in a .Stimulation file.
+This function import the properties of a Stimulation previously saved in a .EXI file.
 }
 \author{
 David Strebler, University of Cologne (Germany).
