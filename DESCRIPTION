@@ -11,7 +11,10 @@ Encoding: UTF-8
 Depends:
     R (>= 2.0.0)
 Imports:
-    methods
+    methods,
+    lattice,
+    gridExtra,
+    plotly
 Collate:
     'Filter-class.R'
     'create_Filter.R'
@@ -40,4 +43,13 @@ Collate:
     'Reader-class.R'
     'create_Reader.R'
     'plot_Reader.R'
+    'Material-class.R'
+    'create_Material.R'
+    'import_Material.R'
+    'export_Material.R'
+    'default_Material.R'
+    'plot_Material.R'
+    'Experiment-class.R'
+    'create_Experiment.R'
+    'plot_Experiment.R'
 RoxygenNote: 5.0.1

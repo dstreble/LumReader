@@ -49,13 +49,17 @@ default_Filters <- function(
 
   list.filters <- list()
 
-  for(i in 1: length(filter.names)){
+  if(length(filter.names) > 0){
+    for(i in 1: length(filter.names)){
 
-    temp.path <- system.file("extdata", filter.names[i],package="LumReader")
+      temp.path <- system.file("extdata", filter.names[i],package="LumReader")
 
-    temp.filter <- import_Filter(temp.path)
+      temp.filter <- import_Filter(temp.path)
 
-    list.filters <- c(list.filters, temp.filter)
+      list.filters <- c(list.filters, temp.filter)
+    }
+  }else{
+    stop("[default_Filters] Error: No filters in the filter list.")
   }
 
   return(list.filters)

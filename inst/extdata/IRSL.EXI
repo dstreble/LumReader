@@ -1,5 +1,6 @@
 Name: IRSL 
 Description: Standard IR LED (Lexsyg). 
+Type: OSL 
 emission (s) [nm ; u.a]: 
  100 ; 3.77724997236212e-282 
  110 ; 2.18871689704944e-274 

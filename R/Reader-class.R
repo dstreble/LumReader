@@ -29,12 +29,14 @@ setClass(Class = "Reader",
                    description="character",
                    stimulation="Stimulation",
                    filterStack="FilterStack",
-                   PMT="PMT"),
+                   PMT="PMT",
+                   detection="PMT"),
          prototype = list(name = NULL,
                           description = NULL,
                           excitation= NULL,
                           filterStack=NULL,
-                          PMT=NULL)
+                          PMT=NULL,
+                          detection=NULL)
 )
 
 #Show method
@@ -60,6 +62,11 @@ setMethod(f = "show",
             }else{
               cat("no PMT. \n")
             }
+            if(!is.null(object@detection)){
+              cat("PMT:", object@detection@name, "(",object@detection@description, ")","\n")
+            }else{
+              cat("no detection windows. \n")
+            }
 
           })
 
@@ -76,6 +83,17 @@ setMethod(f = "setReader",
                         PMT="PMT"),
           definition = function(name,description,stimulation,filterStack,PMT){
 
+            new.detection <- new("PMT")
+            new.detection@name <- "Detection windows"
+
+            if(!(is.null(PMT) || is.null(filterStack))){
+              new.detection@description <- paste(PMT@name, "with", filterStack@result@name)
+
+              new.efficiency <- PMT@efficiency
+              new.efficiency[,2] <- PMT@efficiency[,2] * filterStack@result@reflexion * filterStack@result@transmission[,2]
+
+              new.detection@efficiency <- new.efficiency
+            }
 
             new.object <- new("Reader")
             new.object@name <- name
@@ -83,6 +101,7 @@ setMethod(f = "setReader",
             new.object@stimulation <- stimulation
             new.object@filterStack <- filterStack
             new.object@PMT <- PMT
+            new.object@detection <- new.detection
 
             return(new.object)
           })
@@ -114,6 +133,10 @@ setMethod(f = "getReader",
 
             }else if(ref == "PMT"){
               return(object@PMT)
+
+            }else if(ref == "detection"){
+              return(object@detection)
+
             }else{
               return(object)
             }

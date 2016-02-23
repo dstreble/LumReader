@@ -1,5 +1,6 @@
 Name: GSL 
 Description: Standard green LED (Lexsyg). 
+Type: OSL 
 emission (s) [nm ; u.a]: 
  100 ; 9.07863822740577e-99 
  110 ; 3.29695310825872e-94 

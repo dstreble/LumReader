@@ -4,10 +4,10 @@
 \alias{default_PMT}
 \title{Fonction to upload the default PMT.}
 \usage{
-default_PMT(names)
+default_PMT(name)
 }
 \arguments{
-\item{names}{\link{character} (with default): Names of the PMT to import.}
+\item{name}{\link{character} (with default): name of the PMT to import.}
 }
 \value{
 This function return a list containing the PMT included in the package.

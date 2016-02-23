@@ -8,6 +8,8 @@
 #' @param description
 #'  \link{character}: Description of the Stimulation.
 #'
+#' @param type
+#'  \link{character}: Type of the Stimulation ('TL' or 'OSL').
 #'
 #' @param emission
 #'  \link{numeric}: emission of the Stimulation [u.a].
@@ -25,6 +27,8 @@ create_Stimulation <- function(
 
   description,
 
+  type,
+
   emission
 ){
 
@@ -37,6 +41,14 @@ create_Stimulation <- function(
     stop("[create_Stimulation] Error: Input 'description' is missing.")
   }else if (!is.character(description)){
     stop("[create_Stimulation] Error: Input 'description' is not of type 'character'.")
+  }
+
+  if (missing(type)){
+    stop("[create_Stimulation] Error: Input 'type' is missing.")
+  }else if (!is.character(type)){
+    stop("[create_Stimulation] Error: Input 'type' is not of type 'character'.")
+  }else if(!(type %in% c("TL","OSL"))){
+    stop("[create_Stimulation] Error: Input 'type' can only be 'TL' or 'OSL'.")
   }
 
   if (missing(emission)){
@@ -54,6 +66,7 @@ create_Stimulation <- function(
 
   new.Stimulation <- setStimulation(name=name,
                     description=description,
+                    type=type,
                     emission=emission)
 
   return(new.Stimulation)

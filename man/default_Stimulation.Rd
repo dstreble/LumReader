@@ -2,18 +2,18 @@
 % Please edit documentation in R/default_Stimulation.R
 \name{default_Stimulation}
 \alias{default_Stimulation}
-\title{Fonction to upload the default stimulation.}
+\title{Fonction to upload the default Stimulation.}
 \usage{
-default_Stimulation(names)
+default_Stimulation(name)
 }
 \arguments{
-\item{names}{\link{character} (with default): Names of the stimulation to import.}
+\item{name}{\link{character} (with default): name of the Stimulation to import.}
 }
 \value{
-This function return a list containing the stimulation included in the package.
+This function return a list containing the Stimulation included in the package.
 }
 \description{
-This fonction generates a list containing the stimulation included in the packages
+This fonction generates a list containing the Stimulation included in the packages
 }
 \author{
 David Strebler, University of Cologne (Germany).

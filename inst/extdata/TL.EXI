@@ -1,5 +1,6 @@
 Name: TL 
 Description: Black body radiation for TL at 1000°C. 
+Type: TL 
 emission (s) [nm ; mA/W]: 
  100 ; 2.05011528996087e-69 
  110 ; 2.83139912473893e-62 

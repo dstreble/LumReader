@@ -4,12 +4,14 @@
 \alias{create_Stimulation}
 \title{Function to create a Stimulation.}
 \usage{
-create_Stimulation(name, description, emission)
+create_Stimulation(name, description, type, emission)
 }
 \arguments{
 \item{name}{\link{character}: Name of the Stimulation.}
 
 \item{description}{\link{character}: Description of the Stimulation.}
+
+\item{type}{\link{character}: Type of the Stimulation ('TL' or 'OSL').}
 
 \item{emission}{\link{numeric}: emission of the Stimulation [u.a].}
 }

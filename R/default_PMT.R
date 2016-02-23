@@ -2,8 +2,8 @@
 #'
 #' This fonction generates a list containing the PMT included in the packages
 #'
-#' @param names
-#'  \link{character} (with default): Names of the PMT to import.
+#' @param name
+#'  \link{character} (with default): name of the PMT to import.
 #'
 #' @return
 #' This function return a list containing the PMT included in the package.
@@ -13,7 +13,7 @@
 #' @export default_PMT
 
 default_PMT <- function(
-  names
+  name
 
 ){
   all.file.names <- dir(system.file("extdata", package="LumReader"))
@@ -24,43 +24,27 @@ default_PMT <- function(
       all.PMT.names <- c(all.PMT.names,all.file.names[i])
     }
   }
+  all.PMT.names <- gsub(pattern = ".PMT",replacement = "", x = all.PMT.names)
 
-  if (missing(names)){
-    names <- all.PMT.names
 
-  }else if (!is.character(names)){
-    stop("[default_PMT] Error: Input 'names' is not of type 'characters'.")
 
+  if (missing(name)){
+    stop(paste("[default_PMT] Error: Input 'name' is missing. Available PMT are:", all.PMT.names))
+
+  }else if (!is.character(name)){
+    stop("[default_PMT] Error: Input 'name' is not of type 'characters'.")
+  }
+
+  if(name %in% all.PMT.names){
+      file <- paste(name,".PMT",sep="")
   }else{
-    names <- paste(names,".PMT",sep="")
+    stop(paste("[default_PMT] Warning: The PMT", name, "is not include in the package. Available PMT are:", all.PMT.names))
   }
 
-  PMT.names <- vector()
+  temp.path <- system.file("extdata", file, package="LumReader")
 
-  for(i in 1: length(names)){
-    if(names[i] %in% all.PMT.names){
-      PMT.names <- c(PMT.names, names[i])
-    }else{
-      warning(paste("[default_PMT] Warning: The PMT", names[i], "is not include in the package."))
-    }
-  }
+  new.PMT <- import_PMT(temp.path)
 
-
-  list.PMT <- list()
-
-  for(i in 1: length(PMT.names)){
-
-    temp.path <- system.file("extdata", PMT.names[i],package="LumReader")
-
-    temp.PMT <- import_PMT(temp.path)
-
-    list.PMT <- c(list.PMT, temp.PMT)
-  }
-  if(length(list.PMT)>1){
-    warning("[default_PMT] Warning: only the first PMT of the list is used")
-  }
-
-  new.PMT <- list.PMT[[1]]
 
   return(new.PMT)
 }

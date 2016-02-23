@@ -33,9 +33,21 @@ import_Stimulation <- function(
   description <- strsplit(x = Stimulation.description,split = ": ")[[1]][2]
   new.description <- as.character(description)
 
-  temp.emission <- data[3]                                    ## 3th line contains "Quantum emission (s) [nm ; u.a]:"
+  Stimulation.type <- data[3]                           ## 3nd line contains "type: [type]"
+  type <- strsplit(x = Stimulation.type,split = ": ")[[1]][2]
+  new.type <- as.character(type)
 
-  Stimulation.emission <- data[4:length(data)]                ## 4th-end line contain "[wavelength ; u.a]"
+  if(grepl(pattern = "tl",x = tolower(new.type))){
+    new.type <- "TL"
+  }else if(grepl(pattern = "osl",x = tolower(new.type))){
+    new.type <- "OSL"
+  }else{
+    stop(paste("[import_Stimulation] Error: the 'type'", new.type ,"of", file.name, "is not supported."))
+  }
+
+  temp.emission <- data[4]                                    ## 3th line contains "Quantum emission (s) [nm ; u.a]:"
+
+  Stimulation.emission <- data[5:length(data)]                ## 4th-end line contain "[wavelength ; u.a]"
 
 
   new.emission <- matrix(nrow = length(Stimulation.emission),
@@ -52,6 +64,7 @@ import_Stimulation <- function(
 
   new.object <- setStimulation(name = new.name,
                        description = new.description,
+                       type=new.type,
                        emission = new.emission)
 
   return(new.object)

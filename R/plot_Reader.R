@@ -28,6 +28,7 @@ plot_Reader <- function(
   stimulation <- object@stimulation
   PMT <- object@PMT
   filterStack <- object@filterStack
+  detection <- object@detection
 
   colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
 
@@ -177,14 +178,11 @@ plot_Reader <- function(
 
   # Final result
   if(!is.null(PMT) && !is.null(filterStack)){
-    temp.name <- "Resulting efficiency"
+    temp.name <- detection@name
     temp.color <- colors[1]
 
-    temp.r <- filter.result@reflexion
-    temp.t <- filter.result@transmission[,2]
-
-    temp.l <- PMT@efficiency[,1]
-    temp.s <- PMT@efficiency[,2]*temp.r*temp.t*100
+    temp.l <- detection@efficiency[,1]
+    temp.s <- detection@efficiency[,2]*100
 
     polygon(x = c(100,temp.l,1200),
             y = c(0,temp.s,0),

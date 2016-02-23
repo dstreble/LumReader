@@ -1,6 +1,7 @@
 Name: BSL 
 Description: Standard Blue LED (NICHIA type NSPB-500AS). 
-emission (s) [nm ; u.a]: 
+Type: OSL
+Emission (s) [nm ; u.a]: 
  100 ; 4.94977035234204e-80 
  110 ; 4.5448776613023e-76 
  120 ; 3.25001768571652e-72 

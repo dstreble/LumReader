@@ -33,21 +33,27 @@ export_Stimulation <- function(
     stop("[export_Stimulation] Error: Input 'file.name' is not of type 'character'.")
   }
 
+  new.file <- strsplit(x = file.name,split = "[.]")[[1]][1]
+  new.file <- paste(new.file,".EXI",sep = "")
+
   name <- object@name
   description <- object@description
+  type <- object@type
   emission <- object@emission
 
   text <- vector()
   temp.text <- paste("Name:", name, "\n")
-  cat(temp.text, file = file.name)
+  cat(temp.text, file =   new.file)
   temp.text <- paste("Description:", description, "\n")
-  cat(temp.text,file = file.name,append = TRUE)
+  cat(temp.text,file =    new.file,append = TRUE)
+  temp.text <- paste("Type:", type, "\n")
+  cat(temp.text,file =    new.file,append = TRUE)
   temp.text <- paste("emission (s) [nm ; u.a]:", "\n")
-  cat(temp.text, file = file.name,append = TRUE)
+  cat(temp.text, file = new.file,append = TRUE)
 
   for (i in 1: nrow(emission)){
     temp.text <- paste(text,emission[i,1], ";" ,emission[i,2], "\n")
-    cat(temp.text, file = file.name,append = TRUE)
+    cat(temp.text, file =   new.file,append = TRUE)
   }
 
 }

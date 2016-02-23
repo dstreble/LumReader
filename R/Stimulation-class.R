@@ -27,9 +27,11 @@
 setClass(Class = "Stimulation",
          slots = c(name="character",
                    description="character",
+                   type="character",
                    emission="matrix"),
          prototype = list(name = NULL,
                           description = "",
+                          type="",
                           emission = matrix(data=c(seq(100,1200,10),
                                                      rep(1,111)),
                                               nrow = 111,
@@ -43,32 +45,40 @@ setMethod(f = "show",
           definition = function(object){
             cat("Name:", object@name, "\n")
             cat("Description:", object@description,"\n")
-            cat("Quantum emission [nm ; u.a]:", "\n")
+            cat("Type:", object@type,"\n")
+            cat("Emission [nm ; a.u.]:", "\n")
             cat("\t ...from:", min(object@emission[,1]), "to", max(object@emission[,1]), "[nm]. \n")
-            cat("\t ...between:", min(object@emission[,2])*100, "and", max(object@emission[,2])*100, "[%]. \n")
+            cat("\t ...between:", min(object@emission[,2])*100, "and", max(object@emission[,2]), "[a.u]. \n")
           })
 
 #Set method
 setGeneric(name="setStimulation",
-           def=function(name,description,emission){standardGeneric("setStimulation")}
+           def=function(name,description,type,emission){standardGeneric("setStimulation")}
 )
 
 setMethod(f = "setStimulation",
           signature = c(name="character",
                         description="character",
+                        type="character",
                         emission="matrix"),
-          definition = function(name,description,emission){
+          definition = function(name,description,type,emission){
+
+            if(!is.character(type)){
+              stop("[setStimulation] Error: type has to be of type 'character'.")
+            }else if(!(type %in% c("TL", "OSL"))){
+              stop("[setStimulation] Error: type can only le 'TL' or 'OSL'.")
+            }
 
             if(!is.numeric(emission[,1])){
-              stop("[setStimulation] Error: emission[,1] have to be of type 'numeric'.")
+              stop("[setStimulation] Error: emission[,1] has to be of type 'numeric'.")
             }
 
             if(!is.numeric(emission[,2])){
-              stop("[setStimulation] Error: emission[,2] have to be of type 'numeric'.")
+              stop("[setStimulation] Error: emission[,2] has to be of type 'numeric'.")
             }else if(min(emission[,2])<0){
-              stop("[setStimulation] Error: emission[,2] have to be >= 0.")
+              stop("[setStimulation] Error: emission[,2] has to be >= 0.")
             }else if(min(emission[,2])>1){
-              stop("[setStimulation] Error: emission[,2] have to be <= 1.")
+              stop("[setStimulation] Error: emission[,2] has to be <= 1.")
             }
 
             l <- emission[,1]
@@ -105,6 +115,7 @@ setMethod(f = "setStimulation",
 
             new.object@name <- name
             new.object@description <- description
+            new.object@type <- type
             new.object@emission <- new.emission
 
             return(new.object)
@@ -128,6 +139,9 @@ setMethod(f = "getStimulation",
 
             }else if(ref == "description"){
               return(object@description)
+
+            }else if(ref == "type"){
+              return(object@type)
 
             }else if(ref == "emission"){
               return(object@emission)
