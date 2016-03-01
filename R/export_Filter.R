@@ -40,6 +40,7 @@ export_Filter <- function(
   name <- object@name
   description <- object@description
   thickness <- object@thickness
+  reference.thickness <- object@reference.thickness
   reflexion <- object@reflexion
   transmission <- object@transmission
 
@@ -48,7 +49,7 @@ export_Filter <- function(
   cat(temp.text, file = new.file)
   temp.text <- paste("Description:", description, "\n")
   cat(temp.text,file = new.file,append = TRUE)
-  temp.text <- paste("Thickness [mm]:", thickness, "\n")
+  temp.text <- paste("Thickness [mm]:", reference.thickness, "\n")
   cat(temp.text, file = new.file,append = TRUE)
   temp.text <- paste("Reflexion (1-P) [%]:", reflexion, "\n")
   cat(temp.text, file = new.file,append = TRUE)

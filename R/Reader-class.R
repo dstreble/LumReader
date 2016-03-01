@@ -87,10 +87,17 @@ setMethod(f = "setReader",
             new.detection@name <- "Detection windows"
 
             if(!(is.null(PMT) || is.null(filterStack))){
-              new.detection@description <- paste(PMT@name, "with", filterStack@result@name)
+              new.detection@description <- paste(PMT@name, "with", filterStack@bunch@name)
 
               new.efficiency <- PMT@efficiency
-              new.efficiency[,2] <- PMT@efficiency[,2] * filterStack@result@reflexion * filterStack@result@transmission[,2]
+
+              e <- PMT@efficiency[,2]
+              r <- filterStack@bunch@reflexion
+              t <- filterStack@bunch@transmission[,2]
+              d <- filterStack@bunch@thickness
+              rd <- filterStack@bunch@reference.thickness
+
+              new.efficiency[,2] <- e * r * (t^(d/rd))
 
               new.detection@efficiency <- new.efficiency
             }

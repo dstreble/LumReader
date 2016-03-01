@@ -2,7 +2,10 @@
 #'
 #' This function import the properties of a filter previously saved in a .FLT file.
 #' @param file.name
-#'  \link{character} name of the .FLT file containing the filter properties.
+#'  \link{character} (required): name of the .FLT file containing the filter properties.
+#'
+#' @param thickness
+#'  \link{numeric} (default): Thickness of the filter (by default thickness = reference thickness).
 #'
 #' @return
 #'  The function creates a new \code{\linkS4class{Filter}} object.
@@ -13,7 +16,9 @@
 
 import_Filter <- function(
 
-  file.name
+  file.name,
+
+  thickness= NULL
 
 ){
   if (missing(file.name)){
@@ -33,10 +38,10 @@ import_Filter <- function(
   description <- strsplit(x = filter.description,split = ": ")[[1]][2]
   new.description <- as.character(description)
 
-  filter.thickness <- data[3]                           ## 3rd line contains "thickness [mm]: [thickness]"
-  thickness <- strsplit(x = filter.thickness,split = ": ")[[1]][2]
-  thickness <- gsub(pattern = ",",replacement = ".", x = thickness)
-  new.thickness <- as.numeric(thickness)
+  filter.thickness <- data[3]                           ## 3rd line contains "Thickness [mm]: [thickness]"
+  reference.thickness <- strsplit(x = filter.thickness,split = ": ")[[1]][2]
+  reference.thickness <- gsub(pattern = ",",replacement = ".", x = reference.thickness)
+  new.reference.thickness <- as.numeric(reference.thickness)
 
   filter.reflexion <- data[4]                          ## 4th line contains "reflexion (1-P) [%]: [reflexion]"
   reflexion <- strsplit(x = filter.reflexion,split = ": ")[[1]][2]
@@ -59,8 +64,19 @@ import_Filter <- function(
     new.transmission[i,] <- temp.transmission
   }
 
+  if(is.null(thickness)){
+    new.thickness <- new.reference.thickness
+
+  }else if (!is.numeric(thickness)){
+    stop("[import_Filter] Error: Input 'thickness' is not of type 'numeric'.")
+
+  }else if(thickness<=0){
+    stop("[import_Filter] Error: Input 'thickness' can not be <= 0.")
+  }
+
   new.object <- setFilter(name = new.name,
                           description = new.description,
+                          reference.thickness = new.reference.thickness,
                           thickness = new.thickness,
                           reflexion = new.reflexion,
                           transmission = new.transmission)

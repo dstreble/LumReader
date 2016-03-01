@@ -4,10 +4,12 @@
 \alias{import_Filter}
 \title{Function to import a filter}
 \usage{
-import_Filter(file.name)
+import_Filter(file.name, thickness = NULL)
 }
 \arguments{
-\item{file.name}{\link{character} name of the .FLT file containing the filter properties.}
+\item{file.name}{\link{character} (required): name of the .FLT file containing the filter properties.}
+
+\item{thickness}{\link{numeric} (default): Thickness of the filter (by default thickness = reference thickness).}
 }
 \value{
 The function creates a new \code{\linkS4class{Filter}} object.

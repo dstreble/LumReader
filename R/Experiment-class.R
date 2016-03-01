@@ -31,14 +31,16 @@ setClass(Class = "Experiment",
                    material="Material",
                    type="character",
                    interval="numeric",
-                   emission="Stimulation"),
+                   emission="Stimulation",
+                   detected="Stimulation"),
          prototype = list(name = NULL,
                           description = "",
                           excitation= NULL,
                           material=NULL,
                           type="",
                           interval=NULL,
-                          emission=NULL)
+                          emission=NULL,
+                          detected=NULL)
 )
 
 #Show method
@@ -113,9 +115,9 @@ setMethod(f = "setExperiment",
             new.emission.name <- paste(name,"-emission",sep = "")
 
             if(type == "TL"){
-              new.emission.description <- paste(type, "emission of", material@name, "for a stimulation between", interval[1], "and", interval[2], "[\u00b0C].")
+              new.emission.description <- paste(type, "emission of", material@name, "for a stimulation between", interval[1], "and", interval[2], "[\u00b0C]")
             }else if(type == "OSL"){
-              new.emission.description <- paste(type, "emission of", material@name, "for a stimulation between", interval[1], "and", interval[2], "[nm].")
+              new.emission.description <- paste(type, "emission of", material@name, "for a stimulation between", interval[1], "and", interval[2], "[nm]")
             }else{
               new.emission.description <- description
             }
@@ -179,6 +181,20 @@ setMethod(f = "setExperiment",
             new.emission@type <- new.emission.type
             new.emission@emission <- new.emission.signal
 
+
+            new.detected.name <-paste(new.emission.name,"-detected", sep="")
+            new.detected.description <- paste("Detected signal")
+            new.detected.type <- new.emission.type
+            new.detected.signal <- new.emission.signal
+            new.detected.signal[,2] <- new.detected.signal[,2] * (reader@detection@efficiency[,2] / max(reader@detection@efficiency[,2]))
+
+            new.detected <- new("Stimulation")
+            new.detected@name <- new.detected.name
+            new.detected@description <- new.detected.description
+            new.detected@type <- new.detected.type
+            new.detected@emission <- new.detected.signal
+
+
             new.object <- new("Experiment")
             new.object@name <- name
             new.object@description <- description
@@ -187,6 +203,7 @@ setMethod(f = "setExperiment",
             new.object@type <- type
             new.object@interval <- interval
             new.object@emission <- new.emission
+            new.object@detected <- new.detected
 
             return(new.object)
           })

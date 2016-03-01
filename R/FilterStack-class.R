@@ -27,11 +27,11 @@ setClass(Class = "FilterStack",
          slots = c(name="character",
                    description="character",
                    filters="list",
-                   result="Filter"),
+                   bunch="Filter"),
          prototype = list(name = "",
                           description = "",
                           filters = list(new("Filter")),
-                          result = new("Filter"))
+                          bunch = new("Filter"))
 )
 
 #Show method
@@ -56,12 +56,12 @@ setMethod(f = "show",
             }
 
             cat("filter names:", filters.name, "\n")
-            cat("result:")
-            cat("\t Thickness:", object@result@thickness, "[mm] \n")
-            cat("\t Reflexion (1-P):", object@result@reflexion*100, "[%] \n")
+            cat("bunch:")
+            cat("\t Thickness:", object@bunch@thickness, "[mm] \n")
+            cat("\t Reflexion (1-P):", object@bunch@reflexion*100, "[%] \n")
             cat("\t transmission:", "\n")
-            cat("\t \t ...from:", min(object@result@transmission[,1]), "to", max(object@result@transmission[,1]), "[nm]. \n")
-            cat("\t \t ...between:", min(object@result@transmission[,2])*100, "and", max(object@result@transmission[,2])*100, "[%]. \n")
+            cat("\t \t ...from:", min(object@bunch@transmission[,1]), "to", max(object@bunch@transmission[,1]), "[nm]. \n")
+            cat("\t \t ...between:", min(object@bunch@transmission[,2])*100, "and", max(object@bunch@transmission[,2])*100, "[%]. \n")
           })
 
 #Set method
@@ -81,29 +81,29 @@ setMethod(f = "setFilterStack",
               }
             }
 
-            temp.result <- filters[[1]]
+            temp.bunch <- filters[[1]]
 
             if(length(filters)>1){
               temp.description <- paste("Combination of the filters:", filters[[1]]@name)
 
               for(i in 2: length(filters)){
-                temp.result <- combine_Filters(temp.result, filters[[i]])
+                temp.bunch <- combine_Filters(temp.bunch, filters[[i]])
                 temp.description <- paste(temp.description, "and", filters[[i]]@name)
               }
             }else{
-              temp.description <- temp.result@description
+              temp.description <- temp.bunch@description
             }
 
 
-            new.result <- temp.result
-            new.result@description <- temp.description
+            new.bunch <- temp.bunch
+            new.bunch@description <- temp.description
 
 
             new.object <- new("FilterStack")
             new.object@name <- name
             new.object@description <- description
             new.object@filters <- filters
-            new.object@result <- new.result
+            new.object@bunch <- new.bunch
 
             return(new.object)
           })
@@ -117,7 +117,7 @@ setMethod(f = "getFilterStack",
           signature = "FilterStack",
           definition = function(object){
 
-            new.filter <- object@result
+            new.filter <- object@bunch
 
             return(new.filter)
           })

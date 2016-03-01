@@ -5,6 +5,9 @@
 #' @param names
 #'  \link{character} (with default): Names of the filters to import.
 #'
+#' @param thickness
+#'  \link{character} (with default): thickness of the filters to import.
+#'
 #' @return
 #' This function return a list containing the filters included in the package.
 #'
@@ -13,7 +16,9 @@
 #' @export default_Filters
 
 default_Filters <- function(
-  names
+  names,
+
+  thickness=NULL
 
 ){
   all.file.names <- dir(system.file("extdata", package="LumReader"))
@@ -36,11 +41,21 @@ default_Filters <- function(
     names <- paste(names,".FLT",sep="")
   }
 
+  if(is.null(thickness)){
+    thickness <- vector("numeric",length(names))
+
+  }else if(length(thickness) != length(names)){
+    stop("[default_Filters] Error: Input 'names' and 'thickness' do not have the same length.")
+  }
+
+
   filter.names <- vector()
+  filter.thickness <- vector()
 
   for(i in 1: length(names)){
     if(names[i] %in% all.filter.names){
       filter.names <- c(filter.names, names[i])
+      filter.thickness <- c(filter.thickness, thickness[i])
     }else{
       warning(paste("[default_Filters] Warning: The filter", names[i], "is not include in the package."))
     }
@@ -55,6 +70,10 @@ default_Filters <- function(
       temp.path <- system.file("extdata", filter.names[i],package="LumReader")
 
       temp.filter <- import_Filter(temp.path)
+
+      if(filter.thickness[i] != 0){
+        temp.filter@thickness <- filter.thickness[i]
+      }
 
       list.filters <- c(list.filters, temp.filter)
     }

@@ -27,12 +27,14 @@
 setClass(Class = "Filter",
          slots = c(name="character",
                    description="character",
+                   reference.thickness="numeric",
                    thickness="numeric",
                    reflexion="numeric",
                    transmission="matrix"),
          prototype = list(name = NULL,
                           description = "",
-                          thickness = 0,
+                          reference.thickness=1,
+                          thickness = 1,
                           reflexion = 1,
                           transmission = matrix(data=c(seq(100,1200,10),
                                                        rep(1,111)),
@@ -47,7 +49,7 @@ setMethod(f = "show",
           definition = function(object){
             cat("Name:", object@name, "\n")
             cat("Description:", object@description,"\n")
-            cat("Thickness [mm]:", object@thickness, "\n")
+            cat("Thickness (reference) [mm]: ", object@thickness, " (",object@reference.thickness , ") \n",sep = "")
             cat("Reflexion (1-P) [%]:", object@reflexion*100, "\n")
             cat("Transmission:", "\n")
             cat("\t ...from:", min(object@transmission[,1]), "to", max(object@transmission[,1]), "[nm]. \n")
@@ -56,16 +58,21 @@ setMethod(f = "show",
 
 #Set method
 setGeneric(name="setFilter",
-           def=function(name,description,thickness,reflexion,transmission){standardGeneric("setFilter")}
+           def=function(name,description,reference.thickness,thickness,reflexion,transmission){standardGeneric("setFilter")}
 )
 
 setMethod(f = "setFilter",
           signature = c(name="character",
                         description="character",
+                        reference.thickness="numeric",
                         thickness="numeric",
                         reflexion="numeric",
                         transmission="matrix"),
-          definition = function(name,description,thickness,reflexion,transmission){
+          definition = function(name,description,reference.thickness,thickness,reflexion,transmission){
+
+            if(reference.thickness <= 0){
+              stop("[set_Filter] Error: thickness have to be > 0.")
+            }
 
             if(thickness <= 0){
               stop("[set_Filter] Error: thickness have to be > 0.")
@@ -87,18 +94,19 @@ setMethod(f = "setFilter",
 
             new.object@name <- name
             new.object@description <- description
+            new.object@reference.thickness <- reference.thickness
             new.object@thickness <- thickness
             new.object@reflexion <- reflexion
 
             l <- transmission[,1]
             t <- transmission[,2]
 
-            new.l<- seq(from=100,to=1200, by=10)
-            new.t <- vector()
+            L<- seq(from=100,to=1200, by=10)
+            T <- vector()
 
-            for(i in 1: length(new.l)){
-              i.l.inf <- sum(transmission[,1] <= new.l[i])
-              i.l.sup <- length(transmission[,1]) - sum(transmission[,1] > new.l[i])
+            for(i in 1: length(L)){
+              i.l.inf <- sum(transmission[,1] <= L[i])
+              i.l.sup <- length(transmission[,1]) - sum(transmission[,1] > L[i])
               if(i.l.inf == 0){
                 i.l.inf <- 1
               }
@@ -111,11 +119,15 @@ setMethod(f = "setFilter",
 
               temp.t <- (temp.t.inf+temp.t.sup)/2
 
-              new.t[i] <- temp.t
+              T[i] <- temp.t
             }
 
-            new.transmission <- matrix(c(new.l, new.t),
-                                       nrow = 111,
+            # d <- thickness
+            # r <- reference.thickness
+            # T <- T^(d/r)
+
+            new.transmission <- matrix(c(L, T),
+                                       nrow = length(L),
                                        ncol = 2,
                                        byrow = FALSE)
 
@@ -142,6 +154,9 @@ setMethod(f = "getFilter",
 
             }else if(ref == "description"){
               return(object@description)
+
+            }else if(ref == "reference thickness"){
+              return(object@reference.thickness)
 
             }else if(ref == "thickness"){
               return(object@thickness)

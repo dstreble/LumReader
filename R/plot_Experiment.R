@@ -28,6 +28,7 @@ plot_Experiment <- function(
   reader <- object@reader
   material <- object@material
   emission <- object@emission
+  detected <- object@detected
 
   type <- object@type
   interval <- object@interval
@@ -36,7 +37,6 @@ plot_Experiment <- function(
   old.par <- par( no.readonly = TRUE )
 
   # Page 1: reader
-  colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
 
 
   title <- reader@name
@@ -46,13 +46,11 @@ plot_Experiment <- function(
   filterStack <- reader@filterStack
   detection <- reader@detection
 
-  colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
-
   if(!is.null(filterStack)){
     filters <- filterStack@filters
-    filter.result <- filterStack@result
+    filter.bunch <- filterStack@bunch
 
-    colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
+    colors <- c("black", "grey", "red", "forestgreen","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
 
     if(!is.null(PMT) && !is.null(stimulation)){
       colors <- colors[1:(length(filters)+4)]
@@ -68,7 +66,7 @@ plot_Experiment <- function(
     }
 
   }else{
-    colors <- c("gray", "black", "red")
+    colors <- c("black", "gray", "red")
   }
 
 
@@ -84,20 +82,27 @@ plot_Experiment <- function(
   #Filter stack
   if(!is.null(filterStack)){
 
-    #Filters results
-    temp.filter <- filter.result
-    temp.name <- temp.filter@name
+    #Filter bunch
 
     temp.color <- colors[4]
+
+    temp.filter <- filter.bunch
+    temp.name <- temp.filter@name
+
+    d <- temp.filter@thickness
+    rd <- temp.filter@reference.thickness
 
     r <- temp.filter@reflexion
     l <- temp.filter@transmission[,1]
     t <- temp.filter@transmission[,2]
 
+    temp.x <- l
+    temp.y <- r*(t^(d/rd))*100
+
     par(mar = c(5,5,4,5) )
 
-    plot(x = l,
-         y = r*t*100,
+    plot(x = temp.x,
+         y = temp.y,
          xlim = c(100,1200),
          ylim = c(0,100),
          yaxt = "n",
@@ -124,18 +129,24 @@ plot_Experiment <- function(
     # Filters
     for (i in 1:length(filters)){
 
+      temp.color <- colors[i+4]
+
       temp.filter <- filters[[i]]
       temp.name <- temp.filter@name
       temp.description <- temp.filter@description
+
+      d <- temp.filter@thickness
+      rd <- temp.filter@reference.thickness
 
       r <- temp.filter@reflexion
       l <- temp.filter@transmission[,1]
       t <- temp.filter@transmission[,2]
 
-      temp.color <- colors[i+4]
+      temp.x <- l
+      temp.y <- r*(t^(d/rd))*100
 
-      lines(x = l,
-            y = r*t*100,
+      lines(x = temp.x,
+            y = temp.y,
             lty=2,
             col= temp.color)
 
@@ -184,6 +195,7 @@ plot_Experiment <- function(
          xlab =  "Wavelength [nm]",
          ylab = "Quantum efficiency [%]",
          type = "l",
+         lwd=2,
          col=temp.color)
 
     legend.text <- c(temp.name,legend.text)
@@ -202,7 +214,9 @@ plot_Experiment <- function(
 
     polygon(x = c(100,temp.l,1200),
             y = c(0,temp.s,0),
-            col = temp.color)
+            col = temp.color,
+            density=40,
+            angle=135)
     par(new = TRUE)
 
     legend.text <- c(temp.name,legend.text)
@@ -295,7 +309,7 @@ plot_Experiment <- function(
     #Layout
   par( oma = c(0.5, 0, 3, 0 ) )
 
-  colors <- c("orange", "blue", "black","red")
+  colors <- c("orange", "blue", "black", "forestgreen","red")
 
   title <- name
   subtitle <- description
@@ -360,10 +374,28 @@ plot_Experiment <- function(
   legend.col <- c(legend.col,temp.color)
 
 
+  #Detected signal
+
+  temp.name <- detected@description
+  temp.color <- colors[3]
+  temp.x <- detected@emission[,1]
+  temp.y <- detected@emission[,2]
+
+  polygon(x = c(100,temp.x,1200),
+          y = c(0,temp.y,0),
+          col = temp.color,
+          density=40,
+          angle=135)
+  par(new = TRUE)
+
+  legend.text <- c(legend.text,temp.name)
+  legend.pch <- c(legend.pch, 18)
+  legend.col <- c(legend.col, temp.color)
+
   # Detection windows
 
   temp.name <- detection@description
-  temp.color <- colors[3]
+  temp.color <- colors[4]
   temp.x <- detection@efficiency[,1]
   temp.y <- detection@efficiency[,2]*100
 
@@ -389,7 +421,7 @@ plot_Experiment <- function(
 
   if(type=="OSL"){
     temp.name <- "Stimulation interval"
-    temp.color <- colors[4]
+    temp.color <- colors[5]
 
     abline(v=interval[1],
            lty=2,

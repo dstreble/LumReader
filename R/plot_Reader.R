@@ -34,7 +34,7 @@ plot_Reader <- function(
 
   if(!is.null(filterStack)){
     filters <- filterStack@filters
-    filter.result <- filterStack@result
+    filter.bunch <- filterStack@bunch
 
     colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
 
@@ -68,20 +68,26 @@ plot_Reader <- function(
   #Filter stack
   if(!is.null(filterStack)){
 
-    #Filters results
-    temp.filter <- filter.result
+    #Filters bunchs
+    temp.filter <- filter.bunch
     temp.name <- temp.filter@name
 
     temp.color <- colors[4]
+
+    d <- temp.filter@thickness
+    rd <- temp.filter@reference.thickness
 
     r <- temp.filter@reflexion
     l <- temp.filter@transmission[,1]
     t <- temp.filter@transmission[,2]
 
+    temp.x <- l
+    temp.y <- r*(t^(d/rd))*100
+
     par(mar = c(5,5,4,5) )
 
-    plot(x = l,
-         y = r*t*100,
+    plot(x = temp.x,
+         y = temp.y,
          xlim = c(100,1200),
          ylim = c(0,100),
          yaxt = "n",
@@ -108,18 +114,24 @@ plot_Reader <- function(
     # Filters
     for (i in 1:length(filters)){
 
+      temp.color <- colors[i+4]
+
       temp.filter <- filters[[i]]
       temp.name <- temp.filter@name
       temp.description <- temp.filter@description
 
+
+      d <- temp.filter@thickness
+      rd <- temp.filter@reference.thickness
       r <- temp.filter@reflexion
       l <- temp.filter@transmission[,1]
       t <- temp.filter@transmission[,2]
 
-      temp.color <- colors[i+4]
+      temp.x <- l
+      temp.y <- r*(t^(d/rd))*100
 
-      lines(x = l,
-            y = r*t*100,
+      lines(x = temp.x,
+            y = temp.y,
             lty=2,
             col= temp.color)
 
@@ -176,7 +188,7 @@ plot_Reader <- function(
     par(new = TRUE)
   }
 
-  # Final result
+  # Final detection
   if(!is.null(PMT) && !is.null(filterStack)){
     temp.name <- detection@name
     temp.color <- colors[1]

@@ -24,14 +24,17 @@ plot_Filter <- function(
   name <- object@name
   description <- object@description
   d <- object@thickness
+  rd <- object@reference.thickness
   r <- object@reflexion
   transmission <- object@transmission
 
-  l <- transmission[,1]
-  t <- transmission[,2]
+  t <-transmission[,2]
 
-  plot(x = l,
-       y = r*t*100,
+  temp.x <- transmission[,1]
+  temp.y <- r*(t^(d/rd))*100
+
+  plot(x = temp.x,
+       y = temp.y,
        type = "l",
        xlim = c(100,1200),
        ylim = c(0,100),

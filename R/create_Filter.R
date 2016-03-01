@@ -8,8 +8,11 @@
 #' @param description
 #'  \link{character}: Description of the filter.
 #'
+#' @param reference.thickness
+#'  \link{numeric}: Reference thickness of the filter.
+#'
 #' @param thickness
-#'  \link{numeric}: Thickness of the filter.
+#'  \link{numeric}: Thickness of the filter (by default thickness = reference.thickness).
 #'
 #' @param reflexion
 #'  \link{numeric}: Reflexion of the filter (1-P).
@@ -30,7 +33,9 @@ create_Filter <- function(
 
   description,
 
-  thickness,
+  reference.thickness,
+
+  thickness=NULL,
 
   reflexion,
 
@@ -48,9 +53,17 @@ create_Filter <- function(
     stop("[create_Filter] Error: Input 'description' is not of type 'character'.")
   }
 
-  if (missing(thickness)){
-    stop("[create_Filter] Error: Input 'thickness' is missing.")
-  }else if (!is.numeric(description)){
+  if (missing(reference.thickness)){
+    stop("[create_Filter] Error: Input 'reference.thickness' is missing.")
+  }else if (!is.numeric(reference.thickness)){
+    stop("[create_Filter] Error: Input 'reference.thickness' is not of type 'numeric'.")
+  }else if(reference.thickness<=0){
+    stop("[create_Filter] Error: Input 'reference.thickness' can not be <= 0.")
+  }
+
+  if (is.null(thickness)){
+    thickness <- reference.thickness
+  }else if (!is.numeric(thickness)){
     stop("[create_Filter] Error: Input 'thickness' is not of type 'numeric'.")
   }else if(thickness<=0){
     stop("[create_Filter] Error: Input 'thickness' can not be <= 0.")
@@ -83,6 +96,7 @@ create_Filter <- function(
 
   new.Filter <- setFilter(name=name,
                          description=description,
+                         reference.thickness=reference.thickness,
                          thickness=thickness,
                          reflexion=reflexion,
                          transmission=transmission)

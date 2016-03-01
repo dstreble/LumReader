@@ -4,14 +4,17 @@
 \alias{create_Filter}
 \title{Function to create a filter.}
 \usage{
-create_Filter(name, description, thickness, reflexion, transmission)
+create_Filter(name, description, reference.thickness, thickness = NULL,
+  reflexion, transmission)
 }
 \arguments{
 \item{name}{\link{character}: Name of the filter.}
 
 \item{description}{\link{character}: Description of the filter.}
 
-\item{thickness}{\link{numeric}: Thickness of the filter.}
+\item{reference.thickness}{\link{numeric}: Reference thickness of the filter.}
+
+\item{thickness}{\link{numeric}: Thickness of the filter (by default thickness = reference.thickness).}
 
 \item{reflexion}{\link{numeric}: Reflexion of the filter (1-P).}
 

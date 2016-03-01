@@ -24,7 +24,7 @@ plot_FilterStack <- function(
   title <- object@name
   subtitle <- object@description
   filters <- object@filters
-  result <- object@result
+  bunch <- object@bunch
 
   colors <- rainbow(length(filters)+1)
 
@@ -33,20 +33,25 @@ plot_FilterStack <- function(
   legend.pch <- vector()
 
   for (i in 1:length(filters)){
+
+    temp.color <- colors[i+1]
+
     temp.filter <- filters[[i]]
     temp.name <- temp.filter@name
     temp.description <- temp.filter@description
 
     d <- temp.filter@thickness
+    rd <- temp.filter@reference.thickness
     r <- temp.filter@reflexion
     l <- temp.filter@transmission[,1]
     t <- temp.filter@transmission[,2]
 
-    temp.color <- colors[i+1]
+    temp.x <- l
+    temp.y <- r*(t^(d/rd))*100
 
     if(i ==1){
-      plot(x = l,
-           y = r*t*100,
+      plot(x = temp.x,
+           y = temp.y,
            xlim = c(100,1200),
            ylim = c(0,100),
            main = title,
@@ -59,8 +64,8 @@ plot_FilterStack <- function(
       par(new = TRUE)
 
     }else{
-      lines(x = l,
-            y = r*t*100,
+      lines(x = temp.x,
+            y = temp.y,
             type = "l",
             col= temp.color)
     }
@@ -69,22 +74,26 @@ plot_FilterStack <- function(
   }
   par(new = FALSE)
 
-  if(!is.null(result)){
+  if(!is.null(bunch)){
     par(new = TRUE)
 
-    temp.filter <- result
+    temp.filter <- bunch
     temp.name <- temp.filter@name
     temp.description <- temp.filter@description
 
     temp.color <- colors[1]
 
     d <- temp.filter@thickness
+    rd <- temp.filter@reference.thickness
     r <- temp.filter@reflexion
     l <- temp.filter@transmission[,1]
     t <- temp.filter@transmission[,2]
 
-    polygon(x = c(100,l,1200),
-            y = c(0,r*t*100,0),
+    temp.x <- l
+    temp.y <- r*(t^(d/rd))*100
+
+    polygon(x = c(100,temp.x,1200),
+            y = c(0,temp.y,0),
             col = temp.color)
 
     legend.text <- c(temp.name,legend.text)

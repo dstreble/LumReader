@@ -43,21 +43,49 @@ combine_Filters <- function(
   }else{
     new.name <- paste(filter1@name, "+", filter2@name, sep="")
     new.description <- paste("combination of:", filter1@name,"and", filter2@name)
-    new.thickness <- filter1@thickness + filter2@thickness
 
-    new.reflexion <- filter1@reflexion
+    R1 <- filter1@reflexion
+    R2 <- filter2@reflexion
 
-    new.l <- filter1@transmission[,1]
-    new.t <- filter1@transmission[,2] * filter2@reflexion * filter2@transmission[,2]
+    l <- filter1@transmission[,1]
 
-    new.transmission <- matrix(c(new.l,
-                                 new.t),
-                               nrow = 111,
+    t1 <- filter1@transmission[,2]
+    rd1 <- filter1@reference.thickness
+    d1 <- filter1@thickness
+
+    t2 <- filter2@transmission[,2]
+    rd2 <- filter1@reference.thickness
+    d2 <- filter1@thickness
+
+    new.thickness <- d1 + d2
+    new.reflexion <- max(R1, R2, na.rm = TRUE)
+
+    L <- l
+
+    if(filter1@name == filter2@name){
+      T1 <- t1^(d1/rd1)
+      T2 <- t2^(d2/rd2)
+
+      Tf <- T1 * T2                  # Schott
+      # T <- 1/(1/T1 + 1/T2 - 1)    # Semrock
+
+    }else{
+      T1 <- t1^(d1/rd1)
+      T2 <- t2^(d2/rd2)
+
+      Tf <- T1 * T2                  # Schott
+      # T <- 1/(1/T1 + 1/T2 - 1)    # Semrock
+
+    }
+
+    new.transmission <- matrix(c(L, Tf),
+                               nrow = length(L),
                                ncol = 2,
                                byrow = FALSE)
 
     new.filter <- setFilter(name = new.name,
                             description = new.description,
+                            reference.thickness = new.thickness,
                             thickness = new.thickness,
                             reflexion = new.reflexion,
                             transmission = new.transmission)
