@@ -4,10 +4,12 @@
 \alias{default_Filters}
 \title{Fonction to upload the default filters.}
 \usage{
-default_Filters(names)
+default_Filters(names, thickness = NULL)
 }
 \arguments{
 \item{names}{\link{character} (with default): Names of the filters to import.}
+
+\item{thickness}{\link{character} (with default): thickness of the filters to import.}
 }
 \value{
 This function return a list containing the filters included in the package.

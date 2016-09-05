@@ -3,15 +3,57 @@
 \docType{class}
 \name{Stimulation-class}
 \alias{Stimulation-class}
+\alias{getStimulation}
+\alias{getStimulation,Stimulation,character-method}
 \alias{getStimulation,Stimulation-method}
+\alias{setStimulation}
 \alias{setStimulation,Stimulation-method}
-\alias{show,Stimulation-method}
-\title{Class \code{Stimulation}}
-\description{
-Object class containing the properties of aPhotomultiplier tube.
+\alias{setStimulation,character,character,character,matrix-method}
+\title{Class Stimulation}
+\usage{
+setStimulation(name, description, type, emission)
+
+\S4method{setStimulation}{character,character,character,matrix}(name,
+  description, type, emission)
+
+getStimulation(object, ref)
+
+\S4method{getStimulation}{Stimulation,character}(object, ref)
 }
+\arguments{
+\item{name}{\link{character}: name of the stimulation unit.}
+
+\item{description}{\link{character}: description of the stimulation unit.}
+
+\item{type}{\link{character}: type of the stimulation ('TL' or 'OSL').}
+
+\item{emission}{\link{matrix}: Emission spectra of the stimulation unit.
+The first column contains the wavelength [nm] and the second the intensity of the signal [a.u].}
+
+\item{object}{\linkS4class{Stimulation}: Stimulation unit}
+
+\item{ref}{\link{character}: Slot reference.}
+}
+\description{
+Class \code{Stimulation} contains the properties of a stimulation unit.
+
+Method setStimulation
+
+Method getStimulation
+}
+\section{Slots}{
+
+\describe{
+\item{\code{name}}{\link{character}: name of the stimulation unit.}
+
+\item{\code{description}}{\link{character}: description of the stimulation unit.}
+
+\item{\code{type}}{\link{character}: type of the stimulation ('TL' or 'OSL').}
+
+\item{\code{emission}}{\link{matrix}: Emission spectra of the stimulation unit.
+The first column contains the wavelength [nm] and the second the intensity of the signal [a.u].}
+}}
 \author{
 David Strebler
 }
-\keyword{classes}
 

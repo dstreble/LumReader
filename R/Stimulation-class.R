@@ -1,26 +1,28 @@
-#' Class \code{Stimulation}
+#' Class Stimulation
 #'
-#' Object class containing the properties of aPhotomultiplier tube.
+#' Class \code{Stimulation} contains the properties of a stimulation unit.
+#'
 #'
 #' @name Stimulation-class
 #' @rdname Stimulation-class
 #'
-#' @aliases
-#'  Stimulation-class
-#'  show,Stimulation-method
-#'  setStimulation,Stimulation-method
-#'  getStimulation,Stimulation-method
+#' @slot name
+#'  \link{character}: name of the stimulation unit.
 #'
-#' @docType class
+#' @slot description
+#'  \link{character}: description of the stimulation unit.
+#'
+#' @slot type
+#'  \link{character}: type of the stimulation ('TL' or 'OSL').
+#'
+#' @slot emission
+#'  \link{matrix}: Emission spectra of the stimulation unit.
+#'  The first column contains the wavelength [nm] and the second the intensity of the signal [a.u].
+#'
 #'
 #' @author David Strebler
 #'
-#' @keywords classes
-#'
-#' @import methods
-#'
 #' @exportClass Stimulation
-
 
 ##Class definition
 
@@ -32,14 +34,15 @@ setClass(Class = "Stimulation",
          prototype = list(name = NULL,
                           description = "",
                           type="",
-                          emission = matrix(data=c(seq(100,1200,10),
-                                                     rep(1,111)),
-                                              nrow = 111,
+                          emission = matrix(data=c(seq(200,1200,10),
+                                                     rep(1,101)),
+                                              nrow = 101,
                                               ncol = 2,
                                               byrow = FALSE))
 )
 
 #Show method
+
 setMethod(f = "show",
           signature = "Stimulation",
           definition = function(object){
@@ -51,10 +54,35 @@ setMethod(f = "show",
             cat("\t ...between:", min(object@emission[,2])*100, "and", max(object@emission[,2]), "[a.u]. \n")
           })
 
+
 #Set method
+# Generic
+#' Method setStimulation
+#'
+#' @param  name
+#'  \link{character}: name of the stimulation unit.
+#'
+#' @param description
+#'  \link{character}: description of the stimulation unit.
+#'
+#' @param type
+#'  \link{character}: type of the stimulation ('TL' or 'OSL').
+#'
+#' @param emission
+#'  \link{matrix}: Emission spectra of the stimulation unit.
+#'  The first column contains the wavelength [nm] and the second the intensity of the signal [a.u].
+#'
+#' @name Stimulation-class
+#' @rdname Stimulation-class
+#' @exportMethod setStimulation
+
 setGeneric(name="setStimulation",
            def=function(name,description,type,emission){standardGeneric("setStimulation")}
 )
+
+# Method
+#' @rdname Stimulation-class
+#' @aliases setStimulation setStimulation,Stimulation-method
 
 setMethod(f = "setStimulation",
           signature = c(name="character",
@@ -84,7 +112,7 @@ setMethod(f = "setStimulation",
             l <- emission[,1]
             s <- emission[,2]
 
-            new.l<- seq(from=100,to=1200, by=10)
+            new.l<- seq(from=200,to=1200, by=10)
             new.s <- vector()
 
             for(i in 1: length(new.l)){
@@ -107,7 +135,7 @@ setMethod(f = "setStimulation",
             }
 
             new.emission <- matrix(c(new.l, new.s),
-                                     nrow = 111,
+                                     nrow = length(new.l),
                                      ncol = 2,
                                      byrow = FALSE)
 
@@ -123,9 +151,27 @@ setMethod(f = "setStimulation",
 
 #Get Method
 
+# Generic
+
+#' Method getStimulation
+#'
+#' @name Stimulation-class
+#' @rdname Stimulation-class
+#'
+#' @param object
+#'  \linkS4class{Stimulation}: Stimulation unit
+#' @param ref
+#'  \link{character}: Slot reference.
+#'
+#' @exportMethod getStimulation
+
 setGeneric(name = "getStimulation",
            def = function(object, ref){standardGeneric("getStimulation")}
 )
+
+# Method
+#' @rdname Stimulation-class
+#' @aliases getStimulation getStimulation,Stimulation-method
 
 setMethod(f = "getStimulation",
           signature=c(object = "Stimulation",

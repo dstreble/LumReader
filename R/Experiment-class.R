@@ -1,23 +1,30 @@
-#' Class \code{Experiment}
+#' Class Experiment
 #'
-#' Object class containing the properties of aPhotomultiplier tube.
+#' Class \code{Experiment} contains the caracteristics of a luminescence experiment.
 #'
 #' @name Experiment-class
 #' @rdname Experiment-class
 #'
-#' @aliases
-#'  Experiment-class
-#'  show,Experiment-method
-#'  setExperiment,Experiment-method
-#'  getExperiment,Experiment-method
-#'
-#' @docType class
+#' @slot name
+#'  \link{character}: Name of the luminescence experiment.
+#' @slot description
+#'  \link{character}: Description of the experiment.
+#' @slot reader
+#'  \linkS4class{Reader}: TL/OSL reader unit used for the experiment.
+#' @slot material
+#'  \linkS4class{Material}: Material analysed by the experiment.
+#' @slot type
+#'  \link{character}: Type of experiment ('TL' or 'OSL'). By default, defined by the stimulation unit of the reader.
+#' @slot interval
+#'  \link{numeric}: vector defining the stimulation temperature (for 'TL') or wavelength (for 'OSL') interval on which the experiment focuses.
+#' @slot emission
+#'   \linkS4class{Stimulation}: Material emission spectra for the temperature or wavelength interval on which the experiment focuses.
+#' @slot detected
+#'   \linkS4class{Stimulation}: Emission spectra wich is detected by the reader.
 #'
 #' @author David Strebler
 #'
 #' @keywords classes
-#'
-#' @import methods
 #'
 #' @exportClass Experiment
 
@@ -44,6 +51,10 @@ setClass(Class = "Experiment",
 )
 
 #Show method
+
+#' @rdname Experiment-class
+#' @aliases show show,Experiment-method
+#'
 setMethod(f = "show",
           signature = "Experiment",
           definition = function(object){
@@ -83,14 +94,40 @@ setMethod(f = "show",
             if(!is.null(object@emission)){
               cat("Emission [nm ; a.u.]:", "\n")
               cat("\t ...from:", min(object@emission@emission[,1]), "to", max(object@emission@emission[,1]), "[nm]. \n")
-              cat("\t ...between:", min(object@emission@emission[,2])*100, "and", max(object@emissiont@emission[,2]), "[a.u]. \n")
+              cat("\t ...between:", min(object@emission@emission[,2]), "and", max(object@emissiont@emission[,2]), "[a.u]. \n")
             }
           })
 
 #Set method
+
+## Generic
+#' Method setExperiment
+#'
+#' @name Experiment-class
+#' @rdname Experiment-class
+#'
+#' @param  name
+#'  \link{character}: Name of the luminescence experiment.
+#' @param description
+#'  \link{character}: Description of the experiment.
+#' @param reader
+#'  \linkS4class{Reader}: TL/OSL reader unit used for the experiment.
+#' @param material
+#'  \linkS4class{Material}: Material analysed by the experiment.
+#' @param type
+#'  \link{character}: Type of experiment ('TL' or 'OSL'). By default, defined by the stimulation unit of the reader.
+#' @param interval
+#'  \link{numeric}: vector defining the stimulation temperature (for 'TL') or wavelength (for 'OSL') interval on which the experiment focuses.
+#'
+#' @exportMethod setExperiment
+
 setGeneric(name="setExperiment",
            def=function(name,description,reader, material, type, interval){standardGeneric("setExperiment")}
 )
+
+## Method
+#' @rdname Experiment-class
+#' @aliases setExperiment setExperiment,Experiment-method
 
 setMethod(f = "setExperiment",
           signature = c(name="character",
@@ -124,7 +161,7 @@ setMethod(f = "setExperiment",
 
             new.emission.type <- type
 
-            new.l <- seq(from=100,to=1200, by=10)
+            new.l <- seq(from=200,to=1200, by=10)
 
             if(type=="TL"){
               material.TL <- material@TL
@@ -171,7 +208,7 @@ setMethod(f = "setExperiment",
             }
 
             new.emission.signal <- matrix(c(new.l, new.s),
-                                          nrow = 111,
+                                          nrow = length(new.l),
                                           ncol = 2,
                                           byrow = FALSE)
 
@@ -210,9 +247,26 @@ setMethod(f = "setExperiment",
 
 #Get Method
 
+
+## Generic
+#' Method getExperiment
+#'
+#' @name Experiment-class
+#' @rdname Experiment-class
+#'
+#' @param object
+#'  \linkS4class{Experiment}: Experiment.
+#' @param ref
+#'  \link{character}: Slot reference.
+#'
+#' @exportMethod getExperiment
 setGeneric(name = "getExperiment",
            def = function(object, ref){standardGeneric("getExperiment")}
 )
+
+## Method
+#' @rdname Experiment-class
+#' @aliases getExperiment getExperiment,Experiment-method
 
 setMethod(f = "getExperiment",
           signature=c(object = "Experiment",

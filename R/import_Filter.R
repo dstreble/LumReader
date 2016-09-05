@@ -27,7 +27,11 @@ import_Filter <- function(
     stop("[import_Filter] Error: Input 'file.name' is not of type 'character'.")
   }
 
-  data <- readLines(file.name)
+  new.file.name <- file_path_sans_ext(file.name)
+  ext <- ".FLT"
+  new.file.name <- paste(new.file.name,ext,sep = "")
+
+  data <- readLines(new.file.name)
 
   filter.name <- data[1]                                  ## 1st line contains "name: [name]"
   name <- strsplit(x = filter.name,split = ":")[[1]][2]
@@ -52,8 +56,8 @@ import_Filter <- function(
   ## 6th-end line contain "[wavelength] [tau]"
   filter.transmission <- data[6:length(data)]
 
-  new.transmission <- matrix(nrow = length(filter.transmission),
-                             ncol = 2)
+  new.reference.transmission <- matrix(nrow = length(filter.transmission),
+                                       ncol = 2)
 
   for(i in 1: length(filter.transmission)){
     temp.transmission <- filter.transmission[i]
@@ -61,7 +65,7 @@ import_Filter <- function(
     temp.transmission <- gsub(pattern = ",",replacement = ".", x = temp.transmission)
     temp.transmission <- suppressWarnings(as.numeric(temp.transmission))
     temp.transmission <- temp.transmission[!is.na(temp.transmission)]
-    new.transmission[i,] <- temp.transmission
+    new.reference.transmission[i,] <- temp.transmission
   }
 
   if(is.null(thickness)){
@@ -69,9 +73,13 @@ import_Filter <- function(
 
   }else if (!is.numeric(thickness)){
     stop("[import_Filter] Error: Input 'thickness' is not of type 'numeric'.")
-
   }else if(thickness<=0){
     stop("[import_Filter] Error: Input 'thickness' can not be <= 0.")
+  }else if(thickness < new.reference.thickness){
+    warning("[import_Filter] Warning: Input 'thickness' should not be <= reference.thickness.")
+    new.thickness <- thickness
+  }else{
+    new.thickness <- thickness
   }
 
   new.object <- setFilter(name = new.name,
@@ -79,7 +87,7 @@ import_Filter <- function(
                           reference.thickness = new.reference.thickness,
                           thickness = new.thickness,
                           reflexion = new.reflexion,
-                          transmission = new.transmission)
+                          reference.transmission = new.reference.transmission)
 
   return(new.object)
 }

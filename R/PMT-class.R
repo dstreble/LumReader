@@ -1,23 +1,22 @@
 #' Class \code{PMT}
 #'
-#' Object class containing the properties of aPhotomultiplier tube.
+#' Object class containing the properties of a photomultiplier tube (PMT).
 #'
 #' @name PMT-class
 #' @rdname PMT-class
 #'
-#' @aliases
-#'  PMT-class
-#'  show,PMT-method
-#'  setPMT,PMT-method
-#'  getPMT,PMT-method
+#' @slot name
+#'  \link{character}: Name of the PMT
+#' @slot description
+#'  \link{character}: Description of the PMT
+#' @slot efficiency
+#'  \link{matrix}: Quantum efficiency of the PMT. The first column contains the wavelength [nm] and the second column the corresponding quantum efficiency [0-1].
 #'
 #' @docType class
 #'
 #' @author David Strebler
 #'
 #' @keywords classes
-#'
-#' @import methods
 #'
 #' @exportClass PMT
 
@@ -30,9 +29,9 @@ setClass(Class = "PMT",
                    efficiency="matrix"),
          prototype = list(name = NULL,
                           description = "",
-                          efficiency = matrix(data=c(seq(100,1200,10),
-                                                       rep(1,111)),
-                                                nrow = 111,
+                          efficiency = matrix(data=c(seq(200,1200,10),
+                                                       rep(1,101)),
+                                                nrow = 101,
                                                 ncol = 2,
                                                 byrow = FALSE))
 )
@@ -49,9 +48,29 @@ setMethod(f = "show",
           })
 
 #Set method
+
+## Generic
+#' Method setPMT
+#'
+#' @name PMT-class
+#' @rdname PMT-class
+#'
+#' @param name
+#'  \link{character}: Name of the PMT
+#' @param description
+#'  \link{character}: Description of the PMT
+#' @param efficiency
+#'  \link{matrix}: Quantum efficiency of the PMT. The first column contains the wavelength [nm] and the second column the corresponding quantum efficiency [0-1].
+#'
+#' @exportMethod setPMT
+
 setGeneric(name="setPMT",
            def=function(name,description,efficiency){standardGeneric("setPMT")}
 )
+
+## Method
+#' @rdname PMT-class
+#' @aliases setPMT setPMT,PMT-method
 
 setMethod(f = "setPMT",
           signature = c(name="character",
@@ -74,7 +93,7 @@ setMethod(f = "setPMT",
             l <- efficiency[,1]
             s <- efficiency[,2]
 
-            new.l<- seq(from=100,to=1200, by=10)
+            new.l<- seq(from=200,to=1200, by=10)
             new.s <- vector()
 
             for(i in 1: length(new.l)){
@@ -97,7 +116,7 @@ setMethod(f = "setPMT",
             }
 
             new.efficiency <- matrix(c(new.l, new.s),
-                                       nrow = 111,
+                                       nrow = length(new.l),
                                        ncol = 2,
                                        byrow = FALSE)
 
@@ -112,9 +131,26 @@ setMethod(f = "setPMT",
 
 #Get Method
 
+## Generic
+#' Method getPMT
+#'
+#' @name PMT-class
+#' @rdname PMT-class
+#'
+#' @param object
+#'  \linkS4class{PMT}: PMT.
+#' @param ref
+#'  \link{character}: Material slot.
+#'
+#' @exportMethod getPMT
+
 setGeneric(name = "getPMT",
            def = function(object, ref){standardGeneric("getPMT")}
 )
+
+## Method
+#' @rdname PMT-class
+#' @aliases getPMT getPMT,PMT-method
 
 setMethod(f = "getPMT",
           signature=c(object = "PMT",

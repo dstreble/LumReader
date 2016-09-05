@@ -4,16 +4,51 @@
 \name{FilterStack-class}
 \alias{FilterStack-class}
 \alias{getFilterStack}
-\alias{getFilterStack,FilterStack-method}
+\alias{getFilterStack,FilterStack,character-method}
+\alias{getFilterStack,Material-method}
 \alias{setFilterStack}
 \alias{setFilterStack,FilterStack-method}
-\alias{show,FilterStack-method}
+\alias{setFilterStack,character,character-method}
 \title{Class \code{FilterStack}}
+\usage{
+setFilterStack(name, description, filters)
+
+\S4method{setFilterStack}{character,character}(name, description, filters)
+
+getFilterStack(object, ref)
+
+\S4method{getFilterStack}{FilterStack,character}(object, ref)
+}
+\arguments{
+\item{name}{\link{character}: Name of the filter stack.}
+
+\item{description}{\link{character}: Description of the filter stack.}
+
+\item{filters}{\link{list}: List of the \linkS4class{Filter} which are in the filter stack.}
+
+\item{object}{\linkS4class{FilterStack}: FilterStack}
+
+\item{ref}{\link{character}: FilterStack slot.}
+}
 \description{
 Object class containing a combination of filters.
+
+Method setFilterStack
+
+Method getFilterStack
 }
+\section{Slots}{
+
+\describe{
+\item{\code{name}}{\link{character}: Name of the filter stack.}
+
+\item{\code{description}}{\link{character}: Description of the filter stack.}
+
+\item{\code{filters}}{\link{list}: List of the \linkS4class{Filter} which are in the filter stack.}
+
+\item{\code{bunch}}{\linkS4class{Filter}: Properties of the complete filter stack.}
+}}
 \author{
 David Strebler
 }
-\keyword{classes}
 

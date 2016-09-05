@@ -47,48 +47,40 @@ combine_Filters <- function(
     R1 <- filter1@reflexion
     R2 <- filter2@reflexion
 
-    l <- filter1@transmission[,1]
+    L <- filter1@transmission[,1]
 
-    t1 <- filter1@transmission[,2]
-    rd1 <- filter1@reference.thickness
-    d1 <- filter1@thickness
+    D1.r <- filter1@reference.thickness
+    T1.r <- filter1@reference.transmission[,2]
 
-    t2 <- filter2@transmission[,2]
-    rd2 <- filter1@reference.thickness
-    d2 <- filter1@thickness
+    D1 <- filter1@thickness
+    T1 <- filter1@transmission[,2]
 
-    new.thickness <- d1 + d2
+    T2 <- filter2@transmission[,2]
+    D2 <- filter1@thickness
+
+    new.thickness <- D1 + D2
     new.reflexion <- max(R1, R2, na.rm = TRUE)
 
-    L <- l
-
     if(filter1@name == filter2@name){
-      T1 <- t1^(d1/rd1)
-      T2 <- t2^(d2/rd2)
-
-      Tf <- T1 * T2                  # Schott
-      # T <- 1/(1/T1 + 1/T2 - 1)    # Semrock
+      Tf <- T1.r^(new.thickness/D1.r)
 
     }else{
-      T1 <- t1^(d1/rd1)
-      T2 <- t2^(d2/rd2)
-
       Tf <- T1 * T2                  # Schott
-      # T <- 1/(1/T1 + 1/T2 - 1)    # Semrock
+      # Tf <- 1/(1/T1 + 1/T2 - 1)    # Semrock
 
     }
 
-    new.transmission <- matrix(c(L, Tf),
-                               nrow = length(L),
-                               ncol = 2,
-                               byrow = FALSE)
+    new.reference.transmission <- matrix(c(L, Tf),
+                                         nrow = length(L),
+                                         ncol = 2,
+                                         byrow = FALSE)
 
     new.filter <- setFilter(name = new.name,
                             description = new.description,
                             reference.thickness = new.thickness,
                             thickness = new.thickness,
                             reflexion = new.reflexion,
-                            transmission = new.transmission)
+                            reference.transmission = new.reference.transmission)
   }
 
   return(new.filter)

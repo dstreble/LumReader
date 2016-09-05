@@ -22,11 +22,12 @@ import_Material <- function(
     stop("[import_Material] Error: Input 'file.name' is not of type 'character'.")
   }
 
-  new.file.name <- strsplit(x = file.name,split = "[.]")[[1]][1]
+  new.file.name <- file_path_sans_ext(file.name)
 
   # TL data
 
-  TL.file.name <- paste(new.file.name, ".TL",sep = "")
+  ext <- ".TL"
+  TL.file.name <- paste(new.file.name, ext, sep = "")
 
   if(file.exists(TL.file.name)){
     TL.data <-  readLines(TL.file.name)
@@ -72,7 +73,8 @@ import_Material <- function(
 
   # OSL data
 
-  OSL.file.name <- paste(new.file.name, ".OSL",sep = "")
+  ext <- ".OSL"
+  OSL.file.name <- paste(new.file.name, ext, sep = "")
 
   if(file.exists(OSL.file.name)){
 

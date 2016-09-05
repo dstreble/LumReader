@@ -39,12 +39,12 @@ default_Material <- function(
   }
 
   if(name %in% all.Material.names){
-    file <- name
+    file <- paste(name,".TL",sep = "")
   }else{
     stop(paste("[default_Material] Warning: The Material", name, "is not include in the package. Available Material are:", all.Material.names))
   }
 
-  temp.path <- system.file("extdata", file, package="LumReader")
+  temp.path <- paste(system.file("extdata", package="LumReader"), "/",name,sep = "")
 
   new.Material <- import_Material(temp.path)
 

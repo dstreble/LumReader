@@ -1,23 +1,26 @@
-#' Class \code{Material}
+#' Class Material
 #'
-#' Object class containing the properties of aPhotomultiplier tube.
+#' Class \code{Material} contains the luminescence properties of a material.
 #'
 #' @name Material-class
 #' @rdname Material-class
 #'
-#' @aliases
-#'  Material-class
-#'  show,Material-method
-#'  setMaterial,Material-method
-#'  getMaterial,Material-method
+#' @slot name
+#'  \link{character}: Name of the material.
+#' @slot description.TL
+#'  \link{character}: Description of the TL properties of the material.
+#' @slot description.OSL
+#'  \link{character}: Description of the OSL properties of the material.
+#' @slot TL
+#'  \link{matrix}: TL emission properties of the material. The first column contains the emission wavelength [nm], the second column contains the stimuation temperature [°C] and the third column contains the emission intensity  [a.u].
+#' @slot OSL
+#'  \link{matrix}: OSL emission properties of the material. The first column contains the emission wavelength [nm], the second column contains the stimuation wavelength [nm] and the third column contains the emission intensity  [a.u].
 #'
-#' @docType class
+#'
 #'
 #' @author David Strebler
 #'
 #' @keywords classes
-#'
-#' @import methods
 #'
 #' @exportClass Material
 
@@ -33,16 +36,16 @@ setClass(Class = "Material",
          prototype = list(name = NULL,
                           description.TL = "",
                           description.OSL = "",
-                          TL = matrix(data=c(rep(seq(100,1200,10), each=81),
-                                             rep(seq(0,800,10),111),
-                                             rep(1,8991)),
-                                      nrow = 8991,
+                          TL = matrix(data=c(rep(seq(200,1200,10), each=81),
+                                             rep(seq(0,800,10), times=101),
+                                             rep(1,8181)),
+                                      nrow = 8181,
                                       ncol = 3,
                                       byrow = FALSE),
-                          OSL = matrix(data=c(rep(seq(100,1200,10), each=81),
-                                              rep(seq(200,1000,10), 111),
-                                              rep(1,8991)),
-                                      nrow = 8991,
+                          OSL = matrix(data=c(rep(seq(200,1200,10), each=81),
+                                              rep(seq(200,1000,10), times=101),
+                                              rep(1,8181)),
+                                      nrow = 8181,
                                       ncol = 3,
                                       byrow = FALSE)
                           )
@@ -66,9 +69,33 @@ setMethod(f = "show",
           })
 
 #Set method
+
+## Generic
+#' Method setMaterial
+#'
+#' @name Material-class
+#' @rdname Material-class
+#'
+#' @param name
+#'  \link{character}: Name of the material.
+#' @param description.TL
+#'  \link{character}: Description of the TL properties of the material.
+#' @param description.OSL
+#'  \link{character}: Description of the OSL properties of the material.
+#' @param TL
+#'  \link{matrix}: TL emission properties of the material. The first column contains the emission wavelength [nm], the second column contains the stimuation temperature [°C] and the third column contains the emission intensity  [a.u].
+#' @param OSL
+#'  \link{matrix}: OSL emission properties of the material. The first column contains the emission wavelength [nm], the second column contains the stimuation wavelength [nm] and the third column contains the emission intensity  [a.u].
+#'
+#' @exportMethod setMaterial
+
 setGeneric(name="setMaterial",
            def=function(name,description.TL,description.OSL,TL,OSL){standardGeneric("setMaterial")}
 )
+
+## Method
+#' @rdname Material-class
+#' @aliases setMaterial setMaterial,Material-method
 
 setMethod(f = "setMaterial",
           signature = c(name="character",
@@ -114,7 +141,7 @@ setMethod(f = "setMaterial",
               stop("[setMaterial] Error: Length TL[,3] != length(TL.wavelength)*length(TL.temperatures).")
             }
 
-            new.TL.wavelength <- seq(100,1200,10)
+            new.TL.wavelength <- seq(200,1200,10)
             new.TL.temperatures <- seq(0,800,10)
 
             new.TL.signal <- vector(mode = "numeric",length = length(new.TL.wavelength)*length(new.TL.temperatures))
@@ -171,7 +198,7 @@ setMethod(f = "setMaterial",
               stop("[setMaterial] Error: Length OSL[,3] != length(OSL.wavelength)*length(OSL.color).")
             }
 
-            new.OSL.wavelength <- seq(100,1200,10)
+            new.OSL.wavelength <- seq(200,1200,10)
             new.OSL.color <- seq(200,1000,10)
 
             new.OSL.signal <- vector(mode = "numeric",
@@ -233,9 +260,26 @@ setMethod(f = "setMaterial",
 
 #Get Method
 
+## Generic
+#' Method getMaterial
+#'
+#' @name Material-class
+#' @rdname Material-class
+#'
+#' @param object
+#'  \linkS4class{Material}: Material.
+#' @param ref
+#'  \link{character}: Material slot.
+#'
+#' @exportMethod getMaterial
+
 setGeneric(name = "getMaterial",
            def = function(object, ref){standardGeneric("getMaterial")}
 )
+
+## Method
+#' @rdname Material-class
+#' @aliases getMaterial getMaterial,Material-method
 
 setMethod(f = "getMaterial",
           signature=c(object = "Material",

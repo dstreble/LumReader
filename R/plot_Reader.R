@@ -20,7 +20,7 @@ plot_Reader <- function(
     stop("[plot_Reader] Error: Input 'object' is not of type 'Reader'.")
   }
 
-  colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
+  #colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
 
 
   title <- object@name
@@ -30,7 +30,7 @@ plot_Reader <- function(
   filterStack <- object@filterStack
   detection <- object@detection
 
-  colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet", rainbow(length(filters)))
+  colors <- c("gray", "black", "red", "green","blue", "orange", "cyan", "brown", "chartreuse","chocolate", "coral", "cadetblue", "magenta", "blueviolet")
 
   if(!is.null(filterStack)){
     filters <- filterStack@filters
@@ -82,7 +82,7 @@ plot_Reader <- function(
     t <- temp.filter@transmission[,2]
 
     temp.x <- l
-    temp.y <- r*(t^(d/rd))*100
+    temp.y <- r*t*100
 
     par(mar = c(5,5,4,5) )
 
@@ -128,7 +128,7 @@ plot_Reader <- function(
       t <- temp.filter@transmission[,2]
 
       temp.x <- l
-      temp.y <- r*(t^(d/rd))*100
+      temp.y <- r*t*100
 
       lines(x = temp.x,
             y = temp.y,

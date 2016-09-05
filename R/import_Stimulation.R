@@ -22,7 +22,11 @@ import_Stimulation <- function(
     stop("[import_Stimulation] Error: Input 'file.name' is not of type 'character'.")
   }
 
-  data <- readLines(file.name)
+  new.file.name <- file_path_sans_ext(file.name)
+  ext <- ".EXI"
+  new.file.name <- paste(new.file.name,ext,sep = "")
+
+  data <- readLines(new.file.name)
 
   Stimulation.name <- data[1]                                  ## 1st line contains "name: [name]"
   name <- strsplit(x = Stimulation.name,split = ":")[[1]][2]

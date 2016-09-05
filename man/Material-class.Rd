@@ -3,13 +3,58 @@
 \docType{class}
 \name{Material-class}
 \alias{Material-class}
+\alias{getMaterial}
+\alias{getMaterial,Material,character-method}
 \alias{getMaterial,Material-method}
+\alias{setMaterial}
 \alias{setMaterial,Material-method}
-\alias{show,Material-method}
-\title{Class \code{Material}}
-\description{
-Object class containing the properties of aPhotomultiplier tube.
+\alias{setMaterial,character,character,character,matrix,matrix-method}
+\title{Class Material}
+\usage{
+setMaterial(name, description.TL, description.OSL, TL, OSL)
+
+\S4method{setMaterial}{character,character,character,matrix,matrix}(name,
+  description.TL, description.OSL, TL, OSL)
+
+getMaterial(object, ref)
+
+\S4method{getMaterial}{Material,character}(object, ref)
 }
+\arguments{
+\item{name}{\link{character}: Name of the material.}
+
+\item{description.TL}{\link{character}: Description of the TL properties of the material.}
+
+\item{description.OSL}{\link{character}: Description of the OSL properties of the material.}
+
+\item{TL}{\link{matrix}: TL emission properties of the material. The first column contains the emission wavelength [nm], the second column contains the stimuation temperature [°C] and the third column contains the emission intensity  [a.u].}
+
+\item{OSL}{\link{matrix}: OSL emission properties of the material. The first column contains the emission wavelength [nm], the second column contains the stimuation wavelength [nm] and the third column contains the emission intensity  [a.u].}
+
+\item{object}{\linkS4class{Material}: Material.}
+
+\item{ref}{\link{character}: Material slot.}
+}
+\description{
+Class \code{Material} contains the luminescence properties of a material.
+
+Method setMaterial
+
+Method getMaterial
+}
+\section{Slots}{
+
+\describe{
+\item{\code{name}}{\link{character}: Name of the material.}
+
+\item{\code{description.TL}}{\link{character}: Description of the TL properties of the material.}
+
+\item{\code{description.OSL}}{\link{character}: Description of the OSL properties of the material.}
+
+\item{\code{TL}}{\link{matrix}: TL emission properties of the material. The first column contains the emission wavelength [nm], the second column contains the stimuation temperature [°C] and the third column contains the emission intensity  [a.u].}
+
+\item{\code{OSL}}{\link{matrix}: OSL emission properties of the material. The first column contains the emission wavelength [nm], the second column contains the stimuation wavelength [nm] and the third column contains the emission intensity  [a.u].}
+}}
 \author{
 David Strebler
 }

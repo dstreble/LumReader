@@ -99,7 +99,7 @@ create_Filter <- function(
                          reference.thickness=reference.thickness,
                          thickness=thickness,
                          reflexion=reflexion,
-                         transmission=transmission)
+                         reference.transmission=transmission)
 
   return(new.Filter)
 }

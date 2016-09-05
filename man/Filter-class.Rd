@@ -3,13 +3,66 @@
 \docType{class}
 \name{Filter-class}
 \alias{Filter-class}
+\alias{getFilter}
+\alias{getFilter,Filter,character-method}
 \alias{getFilter,Filter-method}
+\alias{setFilter}
 \alias{setFilter,Filter-method}
-\alias{show,Filter-method}
-\title{Class \code{Filter}}
-\description{
-Object class containing the properties of a optical filter.
+\alias{setFilter,character,character,numeric,numeric,numeric,matrix-method}
+\title{Class Filter}
+\usage{
+setFilter(name, description, reference.thickness, thickness, reflexion,
+  reference.transmission)
+
+\S4method{setFilter}{character,character,numeric,numeric,numeric,matrix}(name,
+  description, reference.thickness, thickness, reflexion,
+  reference.transmission)
+
+getFilter(object, ref)
+
+\S4method{getFilter}{Filter,character}(object, ref)
 }
+\arguments{
+\item{name}{\link{character}: Name of the filter}
+
+\item{description}{\link{character}: Description of the filter}
+
+\item{reference.thickness}{\link{numeric}: Reference thickness for the filter.}
+
+\item{thickness}{\link{numeric}: Actual filter thickness (by default, the reference thickness).}
+
+\item{reflexion}{\link{numeric}: Reflection of the filter (1-P) (between 0, which means that the signal is completely reflected, and 1, which means there is no reflection of the signal).}
+
+\item{reference.transmission}{\link{matrix}: Transmission matrix of the filter. The first column contains the wavelength [nm] and the second the transmission [0-1] at these wavelengths.}
+
+\item{object}{\linkS4class{Filter}: Filter}
+
+\item{ref}{\link{character}: Slot reference.}
+}
+\description{
+Class \code{Filter} contains the properties of a optical filter.
+
+Method setFilter
+
+Method getFilter
+}
+\section{Slots}{
+
+\describe{
+\item{\code{name}}{\link{character}: Name of the filter}
+
+\item{\code{description}}{\link{character}: Description of the filter}
+
+\item{\code{reference.thickness}}{\link{numeric}: Reference thickness for the filter.}
+
+\item{\code{thickness}}{\link{numeric}: Actual filter thickness (by default, the reference thickness).}
+
+\item{\code{reflexion}}{\link{numeric}: Reflection of the filter (1-P) (between 0, which means that the signal is completely reflected, and 1, which means there is no reflection of the signal).}
+
+\item{\code{reference.transmission}}{\link{matrix}: Transmission matrix of the filter for the reference.thickness. The first column contains the wavelength [nm] and the second the transmission [0-1] at these wavelengths.}
+
+\item{\code{transmission}}{\link{matrix}: Transmission matrix of the filter. The first column contains the wavelength [nm] and the second the transmission [0-1] at these wavelengths.}
+}}
 \author{
 David Strebler
 }

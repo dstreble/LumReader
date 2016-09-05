@@ -3,13 +3,71 @@
 \docType{class}
 \name{Experiment-class}
 \alias{Experiment-class}
+\alias{getExperiment}
+\alias{getExperiment,Experiment,character-method}
 \alias{getExperiment,Experiment-method}
+\alias{setExperiment}
 \alias{setExperiment,Experiment-method}
+\alias{setExperiment,character,character,Reader,Material,character,numeric-method}
+\alias{show}
 \alias{show,Experiment-method}
-\title{Class \code{Experiment}}
-\description{
-Object class containing the properties of aPhotomultiplier tube.
+\title{Class Experiment}
+\usage{
+\S4method{show}{Experiment}(object)
+
+setExperiment(name, description, reader, material, type, interval)
+
+
+  \S4method{setExperiment}{character,character,Reader,Material,character,numeric}(name,
+  description, reader, material, type, interval)
+
+getExperiment(object, ref)
+
+\S4method{getExperiment}{Experiment,character}(object, ref)
 }
+\arguments{
+\item{object}{\linkS4class{Experiment}: Experiment.}
+
+\item{name}{\link{character}: Name of the luminescence experiment.}
+
+\item{description}{\link{character}: Description of the experiment.}
+
+\item{reader}{\linkS4class{Reader}: TL/OSL reader unit used for the experiment.}
+
+\item{material}{\linkS4class{Material}: Material analysed by the experiment.}
+
+\item{type}{\link{character}: Type of experiment ('TL' or 'OSL'). By default, defined by the stimulation unit of the reader.}
+
+\item{interval}{\link{numeric}: vector defining the stimulation temperature (for 'TL') or wavelength (for 'OSL') interval on which the experiment focuses.}
+
+\item{ref}{\link{character}: Slot reference.}
+}
+\description{
+Class \code{Experiment} contains the caracteristics of a luminescence experiment.
+
+Method setExperiment
+
+Method getExperiment
+}
+\section{Slots}{
+
+\describe{
+\item{\code{name}}{\link{character}: Name of the luminescence experiment.}
+
+\item{\code{description}}{\link{character}: Description of the experiment.}
+
+\item{\code{reader}}{\linkS4class{Reader}: TL/OSL reader unit used for the experiment.}
+
+\item{\code{material}}{\linkS4class{Material}: Material analysed by the experiment.}
+
+\item{\code{type}}{\link{character}: Type of experiment ('TL' or 'OSL'). By default, defined by the stimulation unit of the reader.}
+
+\item{\code{interval}}{\link{numeric}: vector defining the stimulation temperature (for 'TL') or wavelength (for 'OSL') interval on which the experiment focuses.}
+
+\item{\code{emission}}{\linkS4class{Stimulation}: Material emission spectra for the temperature or wavelength interval on which the experiment focuses.}
+
+\item{\code{detected}}{\linkS4class{Stimulation}: Emission spectra wich is detected by the reader.}
+}}
 \author{
 David Strebler
 }

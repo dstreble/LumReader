@@ -61,7 +61,6 @@ default_Filters <- function(
     }
   }
 
-
   list.filters <- list()
 
   if(length(filter.names) > 0){
@@ -69,10 +68,10 @@ default_Filters <- function(
 
       temp.path <- system.file("extdata", filter.names[i],package="LumReader")
 
-      temp.filter <- import_Filter(temp.path)
-
       if(filter.thickness[i] != 0){
-        temp.filter@thickness <- filter.thickness[i]
+        temp.filter <- import_Filter(temp.path, filter.thickness[i])
+      }else{
+        temp.filter <- import_Filter(temp.path)
       }
 
       list.filters <- c(list.filters, temp.filter)

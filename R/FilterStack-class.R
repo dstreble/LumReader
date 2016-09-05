@@ -5,19 +5,17 @@
 #' @name FilterStack-class
 #' @rdname FilterStack-class
 #'
-#' @aliases
-#'  FilterStack-class
-#'  show,FilterStack-method
-#'  setFilterStack setFilterStack,FilterStack-method
-#'  getFilterStack getFilterStack,FilterStack-method
-#'
-#' @docType class
+#' @slot name
+#'  \link{character}: Name of the filter stack.
+#' @slot description
+#'  \link{character}: Description of the filter stack.
+#' @slot filters
+#'  \link{list}: List of the \linkS4class{Filter} which are in the filter stack.
+#' @slot bunch
+#'  \linkS4class{Filter}: Properties of the complete filter stack.
 #'
 #' @author David Strebler
 #'
-#' @keywords classes
-#'
-#' @import methods
 #'
 #' @exportClass FilterStack
 
@@ -65,9 +63,31 @@ setMethod(f = "show",
           })
 
 #Set method
+
+## Generic
+#' Method setFilterStack
+#'
+#' @name FilterStack-class
+#' @rdname FilterStack-class
+#'
+#' @param name
+#'  \link{character}: Name of the filter stack.
+#' @param description
+#'  \link{character}: Description of the filter stack.
+#' @param filters
+#'  \link{list}: List of the \linkS4class{Filter} which are in the filter stack.
+#'
+#' @exportMethod setFilterStack
+#'
+
 setGeneric(name="setFilterStack",
            def=function(name,description,filters){standardGeneric("setFilterStack")}
 )
+
+
+## Method
+#' @rdname FilterStack-class
+#' @aliases setFilterStack setFilterStack,FilterStack-method
 
 setMethod(f = "setFilterStack",
           signature = c(name="character",
@@ -109,15 +129,45 @@ setMethod(f = "setFilterStack",
           })
 
 # Get method
+
+## Generic
+#' Method getFilterStack
+#'
+#' @name FilterStack-class
+#' @rdname FilterStack-class
+#'
+#' @param object
+#'  \linkS4class{FilterStack}: FilterStack
+#' @param ref
+#'  \link{character}: FilterStack slot.
+#'
+#' @exportMethod getFilterStack
+
+
 setGeneric(name="getFilterStack",
-           def=function(object,name){standardGeneric("getFilterStack")}
+           def=function(object,ref){standardGeneric("getFilterStack")}
 )
 
+## Method
+#' @rdname FilterStack-class
+#' @aliases getFilterStack getFilterStack,Material-method
+
 setMethod(f = "getFilterStack",
-          signature = "FilterStack",
-          definition = function(object){
+          signature = c(object = "FilterStack",
+                        ref = "character"),
+          definition = function(object, ref){
 
-            new.filter <- object@bunch
+            if(ref == "name"){
+              return(object@name)
 
-            return(new.filter)
+            }else if(ref == "description"){
+              return(object@description)
+
+            }else if(ref == "filters"){
+              return(object@filters)
+
+            }else{
+              return(object@bunch)
+            }
+
           })

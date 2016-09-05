@@ -7,8 +7,6 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
-#' @import lattice gridExtra
-#'
 #' @export plot_Experiment
 
 plot_Experiment <- function(
@@ -97,7 +95,7 @@ plot_Experiment <- function(
     t <- temp.filter@transmission[,2]
 
     temp.x <- l
-    temp.y <- r*(t^(d/rd))*100
+    temp.y <- r*t*100
 
     par(mar = c(5,5,4,5) )
 
@@ -143,7 +141,7 @@ plot_Experiment <- function(
       t <- temp.filter@transmission[,2]
 
       temp.x <- l
-      temp.y <- r*(t^(d/rd))*100
+      temp.y <- r*t*100
 
       lines(x = temp.x,
             y = temp.y,

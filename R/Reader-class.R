@@ -17,8 +17,6 @@
 #'
 #' @keywords classes
 #'
-#' @import methods
-#'
 #' @exportClass Reader
 
 

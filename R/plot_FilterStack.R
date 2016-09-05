@@ -47,7 +47,7 @@ plot_FilterStack <- function(
     t <- temp.filter@transmission[,2]
 
     temp.x <- l
-    temp.y <- r*(t^(d/rd))*100
+    temp.y <- r*t*100
 
     if(i ==1){
       plot(x = temp.x,
@@ -90,7 +90,7 @@ plot_FilterStack <- function(
     t <- temp.filter@transmission[,2]
 
     temp.x <- l
-    temp.y <- r*(t^(d/rd))*100
+    temp.y <- r*t*100
 
     polygon(x = c(100,temp.x,1200),
             y = c(0,temp.y,0),

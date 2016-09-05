@@ -3,13 +3,49 @@
 \docType{class}
 \name{PMT-class}
 \alias{PMT-class}
+\alias{getPMT}
+\alias{getPMT,PMT,character-method}
 \alias{getPMT,PMT-method}
+\alias{setPMT}
 \alias{setPMT,PMT-method}
-\alias{show,PMT-method}
+\alias{setPMT,character,character,matrix-method}
 \title{Class \code{PMT}}
-\description{
-Object class containing the properties of aPhotomultiplier tube.
+\usage{
+setPMT(name, description, efficiency)
+
+\S4method{setPMT}{character,character,matrix}(name, description, efficiency)
+
+getPMT(object, ref)
+
+\S4method{getPMT}{PMT,character}(object, ref)
 }
+\arguments{
+\item{name}{\link{character}: Name of the PMT}
+
+\item{description}{\link{character}: Description of the PMT}
+
+\item{efficiency}{\link{matrix}: Quantum efficiency of the PMT. The first column contains the wavelength [nm] and the second column the corresponding quantum efficiency [0-1].}
+
+\item{object}{\linkS4class{PMT}: PMT.}
+
+\item{ref}{\link{character}: Material slot.}
+}
+\description{
+Object class containing the properties of a photomultiplier tube (PMT).
+
+Method setPMT
+
+Method getPMT
+}
+\section{Slots}{
+
+\describe{
+\item{\code{name}}{\link{character}: Name of the PMT}
+
+\item{\code{description}}{\link{character}: Description of the PMT}
+
+\item{\code{efficiency}}{\link{matrix}: Quantum efficiency of the PMT. The first column contains the wavelength [nm] and the second column the corresponding quantum efficiency [0-1].}
+}}
 \author{
 David Strebler
 }

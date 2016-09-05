@@ -7,8 +7,6 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
-#' @import lattice gridExtra plotly
-#'
 #' @export plot_Material
 
 plot_Material <- function(
