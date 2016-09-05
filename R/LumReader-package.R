@@ -57,6 +57,7 @@
 #' @keywords package
 #'
 #' @import methods
+#' @importFrom tools file_path_sans_ext
 #' @importFrom grDevices heat.colors rainbow terrain.colors
 #' @importFrom graphics abline axis legend lines mtext par plot polygon
 #' @importFrom plotly plot_ly layout
