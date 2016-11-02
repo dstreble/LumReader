@@ -20,7 +20,6 @@ plot_FilterStack <- function(
     stop("[plot_FilterStack] Error: Input 'object' is not of type 'FilterStack'.")
   }
 
-
   title <- object@name
   subtitle <- object@description
   filters <- object@filters
@@ -31,6 +30,12 @@ plot_FilterStack <- function(
   legend.text <- vector()
   legend.col <- colors
   legend.pch <- vector()
+
+  plot.x.min <- 200
+  plot.x.max <- 1000
+
+  plot.y.min <- 0
+  plot.y.max <- 100
 
   for (i in 1:length(filters)){
 
@@ -52,8 +57,8 @@ plot_FilterStack <- function(
     if(i ==1){
       plot(x = temp.x,
            y = temp.y,
-           xlim = c(100,1200),
-           ylim = c(0,100),
+           xlim = c(plot.x.min,plot.x.max),
+           ylim = c(plot.y.min,plot.y.max),
            main = title,
            sub= subtitle,
            xlab = "Wavelength [nm]",
@@ -92,7 +97,7 @@ plot_FilterStack <- function(
     temp.x <- l
     temp.y <- r*t*100
 
-    polygon(x = c(100,temp.x,1200),
+    polygon(x = c(plot.x.min,temp.x,plot.x.max),
             y = c(0,temp.y,0),
             col = temp.color)
 

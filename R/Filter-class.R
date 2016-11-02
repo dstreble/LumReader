@@ -43,14 +43,14 @@ setClass(Class = "Filter",
                           reference.thickness=1,
                           thickness = 1,
                           reflexion = 1,
-                          reference.transmission = matrix(data=c(seq(200,1200,10),
-                                                                 rep(1,101)),
-                                                          nrow = 101,
+                          reference.transmission = matrix(data=c(seq(200,1000,10),
+                                                                 rep(1,81)),
+                                                          nrow = 81,
                                                           ncol = 2,
                                                           byrow = FALSE),
-                          transmission = matrix(data=c(seq(200,1200,10),
-                                                       rep(1,101)),
-                                                nrow = 101,
+                          transmission = matrix(data=c(seq(200,1000,10),
+                                                       rep(1,81)),
+                                                nrow = 81,
                                                 ncol = 2,
                                                 byrow = FALSE))
         )
@@ -134,7 +134,7 @@ setMethod(f = "setFilter",
             l <- reference.transmission[,1]
             t <- reference.transmission[,2]
 
-            L<- seq(from=200,to=1200, by=10)
+            L<- seq(from=200,to=1000, by=10)
             T1 <- vector()
 
             for(i in 1: length(L)){

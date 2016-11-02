@@ -76,7 +76,7 @@ import_Filter <- function(
   }else if(thickness<=0){
     stop("[import_Filter] Error: Input 'thickness' can not be <= 0.")
   }else if(thickness < new.reference.thickness){
-    warning("[import_Filter] Warning: Input 'thickness' should not be <= reference.thickness.")
+    warning("[import_Filter] Warning: Input 'thickness' should not be < reference.thickness.")
     new.thickness <- thickness
   }else{
     new.thickness <- thickness

@@ -20,6 +20,11 @@ plot_Filter <- function(
     stop("[plot_Filter] Error: Input 'object' is not of type 'Filter'.")
   }
 
+  plot.x.min <- 200
+  plot.x.max <- 1000
+
+  plot.y.min <- 0
+  plot.y.max <- 100
 
   name <- object@name
   description <- object@description
@@ -34,8 +39,8 @@ plot_Filter <- function(
   plot(x = temp.x,
        y = temp.y,
        type = "l",
-       xlim = c(100,1200),
-       ylim = c(0,100),
+       xlim = c(plot.x.min,plot.x.max),
+       ylim = c(plot.y.min,plot.y.max),
        main = name,
        sub = description,
        xlab = "Wavelength [nm]",

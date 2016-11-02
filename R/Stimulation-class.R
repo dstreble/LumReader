@@ -34,9 +34,9 @@ setClass(Class = "Stimulation",
          prototype = list(name = NULL,
                           description = "",
                           type="",
-                          emission = matrix(data=c(seq(200,1200,10),
-                                                     rep(1,101)),
-                                              nrow = 101,
+                          emission = matrix(data=c(seq(200,1000,10),
+                                                     rep(1,81)),
+                                              nrow = 81,
                                               ncol = 2,
                                               byrow = FALSE))
 )
@@ -112,7 +112,7 @@ setMethod(f = "setStimulation",
             l <- emission[,1]
             s <- emission[,2]
 
-            new.l<- seq(from=200,to=1200, by=10)
+            new.l<- seq(from=200,to=1000, by=10)
             new.s <- vector()
 
             for(i in 1: length(new.l)){

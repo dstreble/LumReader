@@ -36,16 +36,16 @@ setClass(Class = "Material",
          prototype = list(name = NULL,
                           description.TL = "",
                           description.OSL = "",
-                          TL = matrix(data=c(rep(seq(200,1200,10), each=81),
-                                             rep(seq(0,800,10), times=101),
-                                             rep(1,8181)),
-                                      nrow = 8181,
+                          TL = matrix(data=c(rep(seq(200,1000,10), each=81),
+                                             rep(seq(0,800,10), times=81),
+                                             rep(1,6561)),
+                                      nrow = 6561,
                                       ncol = 3,
                                       byrow = FALSE),
-                          OSL = matrix(data=c(rep(seq(200,1200,10), each=81),
-                                              rep(seq(200,1000,10), times=101),
-                                              rep(1,8181)),
-                                      nrow = 8181,
+                          OSL = matrix(data=c(rep(seq(200,1000,10), each=81),
+                                              rep(seq(200,1000,10), times=81),
+                                              rep(1,6561)),
+                                      nrow = 6561,
                                       ncol = 3,
                                       byrow = FALSE)
                           )
@@ -141,7 +141,7 @@ setMethod(f = "setMaterial",
               stop("[setMaterial] Error: Length TL[,3] != length(TL.wavelength)*length(TL.temperatures).")
             }
 
-            new.TL.wavelength <- seq(200,1200,10)
+            new.TL.wavelength <- seq(200,1000,10)
             new.TL.temperatures <- seq(0,800,10)
 
             new.TL.signal <- vector(mode = "numeric",length = length(new.TL.wavelength)*length(new.TL.temperatures))
@@ -198,7 +198,7 @@ setMethod(f = "setMaterial",
               stop("[setMaterial] Error: Length OSL[,3] != length(OSL.wavelength)*length(OSL.color).")
             }
 
-            new.OSL.wavelength <- seq(200,1200,10)
+            new.OSL.wavelength <- seq(200,1000,10)
             new.OSL.color <- seq(200,1000,10)
 
             new.OSL.signal <- vector(mode = "numeric",

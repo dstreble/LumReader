@@ -65,6 +65,12 @@ plot_Reader <- function(
   old.par <- par( no.readonly = TRUE )
   par( oma = c(0.5, 0, 3, 0 ) )
 
+  plot.x.min <- 200
+  plot.x.max <- 1000
+
+  plot.y.min <- 0
+  plot.y.max <- 100
+
   #Filter stack
   if(!is.null(filterStack)){
 
@@ -88,8 +94,8 @@ plot_Reader <- function(
 
     plot(x = temp.x,
          y = temp.y,
-         xlim = c(100,1200),
-         ylim = c(0,100),
+         xlim = c(plot.x.min,plot.x.max),
+         ylim = c(plot.y.min,plot.y.max),
          yaxt = "n",
          xaxt = "n",
          xlab = "",
@@ -151,7 +157,7 @@ plot_Reader <- function(
     temp.l <- stimulation@emission[,1]
     temp.e <- stimulation@emission[,2]*100
 
-    polygon(x = c(100,temp.l,1200),
+    polygon(x = c(plot.x.min,temp.l,plot.x.max),
             y = c(0,temp.e,0),
             col = temp.color,
             density=20)
@@ -171,10 +177,12 @@ plot_Reader <- function(
     temp.s <- PMT@efficiency[,2]
     max.s<-max(temp.s)
 
+    plot.y.max <- max.s*100
+
     plot(x=temp.l,
          y=temp.s*100,
-         xlim = c(100,1200),
-         ylim = c(0,max.s*100),
+         xlim = c(plot.x.min, plot.x.max),
+         ylim = c(plot.y.min, plot.y.max),
          main = title,
          sub = subtitle,
          xlab =  "Wavelength [nm]",
@@ -196,7 +204,7 @@ plot_Reader <- function(
     temp.l <- detection@efficiency[,1]
     temp.s <- detection@efficiency[,2]*100
 
-    polygon(x = c(100,temp.l,1200),
+    polygon(x = c(plot.x.min,temp.l,plot.x.max),
             y = c(0,temp.s,0),
             col = temp.color)
     par(new = TRUE)

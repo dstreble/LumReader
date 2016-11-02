@@ -161,7 +161,7 @@ setMethod(f = "setExperiment",
 
             new.emission.type <- type
 
-            new.l <- seq(from=200,to=1200, by=10)
+            new.l <- seq(from=200,to=1000, by=10)
 
             if(type=="TL"){
               material.TL <- material@TL

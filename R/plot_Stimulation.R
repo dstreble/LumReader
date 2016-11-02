@@ -20,7 +20,6 @@ plot_Stimulation <- function(
     stop("[plot_Stimulation] Error: Input 'object' is not of type 'Stimulation'.")
   }
 
-
   name <- object@name
   description <- object@description
   emission <- object@emission
@@ -30,11 +29,18 @@ plot_Stimulation <- function(
 
   max.s <- max(s,na.rm = TRUE)
 
+
+  plot.x.min <- 200
+  plot.x.max <- 1000
+
+  plot.y.min <- 0
+  plot.y.max <- max.s*100
+
   plot(x = l,
        y = s*100,
        type = "l",
-       xlim = c(100,1200),
-       ylim = c(0,max.s*100),
+       xlim = c(plot.x.min,plot.x.max),
+       ylim = c(plot.y.min,plot.y.max),
        main = name,
        sub = description,
        xlab = "Wavelength [nm]",

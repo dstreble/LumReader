@@ -86,6 +86,7 @@ plot_Material <- function(
                    y=TL.y,
                    z=TL.z,
                    type = "surface")
+  #TL.3D <- plot_ly(z=TL.z, type = "surface") #Temp... bug with new version of plotly when length(x) =! length(y)
 
   TL.3D.title <- paste("Intensity of the TL emission of", name, "[u.a]")
 
@@ -104,6 +105,8 @@ plot_Material <- function(
                    y=OSL.y,
                    z=OSL.z,
                    type = "surface")
+  #OSL.3D <- plot_ly(z=OSL.z, type = "surface") #Temp... bug with new version of plotly when length(x) =! length(y)
+
 
   OSL.3D.title <- paste("Intensity of the OSL emission of", name, "[u.a]")
 

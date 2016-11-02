@@ -62,10 +62,10 @@ import_Material <- function(
   }else{
     new.TL.name <- NULL
     new.TL.description <- ""
-    new.TL <- matrix(data=c(rep(seq(100,1200,10), each=50),
-                            rep(seq(10,500,10),111),
-                            rep(1,5550)),
-                     nrow = 5550,
+    new.TL <- matrix(data=c(rep(seq(200,1000,10), each=81),
+                            rep(seq(0,800,10),times=81),
+                            rep(1,6561)),
+                     nrow = 6561,
                      ncol = 3,
                      byrow = FALSE)
   }
@@ -110,10 +110,10 @@ import_Material <- function(
   }else{
     new.OSL.name <- NULL
     new.OSL.description <- ""
-    new.OSL <- matrix(data=c(rep(seq(100,1200,10), each=81),
-                             rep(seq(200,1000,10), 111),
-                             rep(1,8991)),
-                      nrow = 8991,
+    new.OSL <- matrix(data=c(rep(seq(200,1000,10), each=81),
+                             rep(seq(200,1000,10), times=81),
+                             rep(1,6561)),
+                      nrow = 6561,
                       ncol = 3,
                       byrow = FALSE)
   }

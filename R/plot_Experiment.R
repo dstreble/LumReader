@@ -19,7 +19,6 @@ plot_Experiment <- function(
     stop("[plot_Experiment] Error: Input 'object' is not of type 'Experiment'.")
   }
 
-
   name <- object@name
   description <- object@description
 
@@ -67,8 +66,6 @@ plot_Experiment <- function(
     colors <- c("black", "gray", "red")
   }
 
-
-
   legend.text <- vector()
   legend.col <- colors
   legend.pch <- vector()
@@ -76,6 +73,12 @@ plot_Experiment <- function(
   # Plot
   old.par <- par( no.readonly = TRUE )
   par( oma = c(0.5, 0, 3, 0 ) )
+
+  plot.x.min <- 200
+  plot.x.max <- 1000
+
+  plot.y.min <- 0
+  plot.y.max <- 100
 
   #Filter stack
   if(!is.null(filterStack)){
@@ -101,8 +104,8 @@ plot_Experiment <- function(
 
     plot(x = temp.x,
          y = temp.y,
-         xlim = c(100,1200),
-         ylim = c(0,100),
+         xlim = c(plot.x.min,plot.x.max),
+         ylim = c(plot.y.min,plot.y.max),
          yaxt = "n",
          xaxt = "n",
          xlab = "",
@@ -164,7 +167,7 @@ plot_Experiment <- function(
     temp.l <- stimulation@emission[,1]
     temp.e <- stimulation@emission[,2]*100
 
-    polygon(x = c(100,temp.l,1200),
+    polygon(x = c(plot.x.min,temp.l,plot.x.max),
             y = c(0,temp.e,0),
             col = temp.color,
             density=20)
@@ -186,8 +189,8 @@ plot_Experiment <- function(
 
     plot(x=temp.l,
          y=temp.s*100,
-         xlim = c(100,1200),
-         ylim = c(0,max.s*100),
+         xlim = c(plot.x.min,plot.x.max),
+         ylim = c(plot.y.max,max.s*100),
          main = title,
          sub = subtitle,
          xlab =  "Wavelength [nm]",
@@ -210,7 +213,7 @@ plot_Experiment <- function(
     temp.l <- detection@efficiency[,1]
     temp.s <- detection@efficiency[,2]*100
 
-    polygon(x = c(100,temp.l,1200),
+    polygon(x = c(plot.x.min,temp.l,plot.x.max),
             y = c(0,temp.s,0),
             col = temp.color,
             density=40,
@@ -324,10 +327,12 @@ plot_Experiment <- function(
   temp.x <- reader@stimulation@emission[,1]
   temp.y <- reader@stimulation@emission[,2]
 
+  plot.y.max <- max(temp.y)
+
   plot(x = temp.x,
        y = temp.y,
-       xlim = c(100,1200),
-       ylim = c(0,max(temp.y)),
+       xlim = c(plot.x.min,plot.x.max),
+       ylim = c(plot.y.min,plot.y.max),
        yaxt = "n",
        xaxt = "n",
        xlab = "",
@@ -342,7 +347,7 @@ plot_Experiment <- function(
         cex = 0.8
   )
 
-  polygon(x = c(100,temp.x,1200),
+  polygon(x = c(plot.x.min,temp.x,plot.x.max),
           y = c(0,temp.y,0),
           col = temp.color,
           density=20)
@@ -361,7 +366,7 @@ plot_Experiment <- function(
   temp.x <- emission@emission[,1]
   temp.y <- emission@emission[,2]
 
-  polygon(x = c(100,temp.x,1200),
+  polygon(x = c(plot.x.min,temp.x,plot.x.max),
           y = c(0,temp.y,0),
           col = temp.color,
           density=20)
@@ -379,7 +384,7 @@ plot_Experiment <- function(
   temp.x <- detected@emission[,1]
   temp.y <- detected@emission[,2]
 
-  polygon(x = c(100,temp.x,1200),
+  polygon(x = c(plot.x.min,temp.x,plot.x.max),
           y = c(0,temp.y,0),
           col = temp.color,
           density=40,
@@ -397,10 +402,12 @@ plot_Experiment <- function(
   temp.x <- detection@efficiency[,1]
   temp.y <- detection@efficiency[,2]*100
 
+  plot.y.max <- max(temp.y)
+
   plot(x=temp.x,
        y=temp.y,
-       xlim = c(100,1200),
-       ylim = c(0,max(temp.y)),
+       xlim = c(plot.x.min,plot.x.max),
+       ylim = c(plot.y.min,plot.y.max),
        main = title,
        sub = subtitle,
        xlab =  "Wavelength [nm]",
