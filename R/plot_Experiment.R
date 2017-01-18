@@ -185,12 +185,12 @@ plot_Experiment <- function(
     temp.color <- colors[2]
     temp.l <- PMT@efficiency[,1]
     temp.s <- PMT@efficiency[,2]
-    max.s<-max(temp.s)
+    max.s <- max(temp.s)
 
     plot(x=temp.l,
          y=temp.s*100,
          xlim = c(plot.x.min,plot.x.max),
-         ylim = c(plot.y.max,max.s*100),
+         ylim = c(0,max.s*100),
          main = title,
          sub = subtitle,
          xlab =  "Wavelength [nm]",
@@ -327,12 +327,14 @@ plot_Experiment <- function(
   temp.x <- reader@stimulation@emission[,1]
   temp.y <- reader@stimulation@emission[,2]
 
-  plot.y.max <- max(temp.y)
+  temp.y <- temp.y/max(temp.y)
+
+  #plot.y.max <- max(temp.y)
 
   plot(x = temp.x,
        y = temp.y,
        xlim = c(plot.x.min,plot.x.max),
-       ylim = c(plot.y.min,plot.y.max),
+       ylim = c(0,1),
        yaxt = "n",
        xaxt = "n",
        xlab = "",
@@ -365,6 +367,8 @@ plot_Experiment <- function(
   temp.color <- colors[2]
   temp.x <- emission@emission[,1]
   temp.y <- emission@emission[,2]
+
+  #temp.y <- temp.y/max(temp.y)
 
   polygon(x = c(plot.x.min,temp.x,plot.x.max),
           y = c(0,temp.y,0),

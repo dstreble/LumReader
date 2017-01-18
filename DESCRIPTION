@@ -19,7 +19,8 @@ Imports:
     methods,
     lattice,
     gridExtra,
-    plotly
+    plotly,
+    shiny
 Collate:
     'Filter-class.R'
     'create_Filter.R'
@@ -58,4 +59,5 @@ Collate:
     'create_Experiment.R'
     'plot_Experiment.R'
     'LumReader-package.R'
+    'call_ShinyLumReader.R'
 RoxygenNote: 5.0.1

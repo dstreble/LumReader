@@ -41,9 +41,9 @@
 #'  \bold{Project source code repository} \cr
 #'  \url{https://github.com/dstreble/LumReader} \cr
 #'
-#'  \bold{Related package projects}\cr
-#'    \url{http://www.r-luminescence.de} \cr
-#'    \url{http://cran.r-project.org/package=Luminescence}\cr
+##  \bold{Related package projects}\cr
+##    \url{http://www.r-luminescence.de} \cr
+##    \url{http://cran.r-project.org/package=Luminescence}\cr
 #'
 #'  \bold{Package maintainer} \cr
 #'  David Strebler, Geographisches Institut, Universitat zu Koeln, Cologne, Germany. \cr
@@ -57,6 +57,7 @@
 #' @keywords package
 #'
 #' @import methods
+#' @import shiny
 #' @importFrom tools file_path_sans_ext
 #' @importFrom grDevices heat.colors rainbow terrain.colors
 #' @importFrom graphics abline axis legend lines mtext par plot polygon

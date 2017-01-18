@@ -36,9 +36,6 @@ The user can used the filters, PMT and stimulation unit already includes in the 
  \bold{Project source code repository} \cr
  \url{https://github.com/dstreble/LumReader} \cr
 
- \bold{Related package projects}\cr
-   \url{http://www.r-luminescence.de} \cr
-   \url{http://cran.r-project.org/package=Luminescence}\cr
 
  \bold{Package maintainer} \cr
  David Strebler, Geographisches Institut, Universitat zu Koeln, Cologne, Germany. \cr
