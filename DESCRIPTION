@@ -2,18 +2,18 @@ Package: LumReader
 Type: Package
 Title: TL/OSL Reader Simulator
 Version: 0.1.0
-Date: 2016-07-01
+Date: 2017-01-25
 Authors@R: c(
   person("David", "Strebler", role= c("aut","cre"), email= "david.strebler@uni-koeln.de"),
   person("Dominik", "Brill", role = c("ths")),
   person("Helmut", "Brückner", role=c("ths"))
   )
 Maintainer: David Strebler <david.strebler@uni-koeln.de>
-Description: A series of function to estimate the detection windows of a TL/OSL reader based on the filters and the PMT selected. It also allows to check if the stimulation unit do not overlap with this detection windows and if the signal emitted by the material is detected by the reader.
+Description: A series of functions to estimate the detection windows of a luminescence reader based on the filters and the photomultiplier (PMT) selected. These functions also allow to simulate a luminescence experiment based on the thermoluminesce (TL) or the optically stimulated luminescence (OSL) properties of a material.
 License: GPL-3
 Encoding: UTF-8
 Depends:
-    R (>= 2.0.0)
+    R (>= 3.3.2)
 Imports:
     tools,
     methods,

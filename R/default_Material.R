@@ -8,6 +8,11 @@
 #' @return
 #' This function return a list containing the Material included in the package.
 #'
+#' @examples
+#' example <- default_Material('example')
+#'
+#' plot_Material(example)
+#'
 #' @author David Strebler, University of Cologne (Germany).
 #'
 #' @export default_Material

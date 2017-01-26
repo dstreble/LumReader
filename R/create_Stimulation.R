@@ -16,6 +16,28 @@
 #'
 #' @return
 #'  This function return a new Stimulation.
+#' @examples
+#' # Data
+#' name <- "example"
+#' description <- "non realistic stimulation"
+#'
+#' wavelength <- seq(200,1000,10)
+#'
+#' values <- dnorm(x = wavelength,mean = 500,sd = 25)
+#' values <- values/max(values)
+#'
+#' emission <- matrix(data=c(wavelength,
+#'                           values),
+#'                    nrow = 81,
+#'                    ncol = 2,
+#'                    byrow = FALSE)
+#'
+#' stimulation <- create_Stimulation(name = name,
+#'                                   description = description,
+#'                                   type = 'OSL',
+#'                                   emission = emission)
+#'
+#' plot_Stimulation(stimulation)
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'

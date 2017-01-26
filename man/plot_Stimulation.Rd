@@ -12,6 +12,13 @@ plot_Stimulation(object)
 \description{
 This function plots the selected Stimulation.
 }
+\examples{
+stimulation <- default_Stimulation('example')
+
+plot_Stimulation(stimulation)
+
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

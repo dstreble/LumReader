@@ -15,6 +15,12 @@ This function return a list containing the Stimulation included in the package.
 \description{
 This fonction generates a list containing the Stimulation included in the packages
 }
+\examples{
+example <- default_Stimulation('example')
+
+plot_Stimulation(example)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

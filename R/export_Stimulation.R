@@ -12,6 +12,21 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' example <- default_Stimulation('example')
+#' file.name <- 'example'
+#'
+#' \dontrun{
+#' export_Stimulation(example, file.name) # uncomment
+#' }
+#'
+#' # There is now an 'example.EXI' file in the 'working directory'.
+#' # This file is a classical .txt file despite the extension.
+#'
+#' file <- paste(getwd(),'/', file.name,'.EXI', sep="")
+#' print(file)
+#' # readLines(file)
+#'
 #' @export export_Stimulation
 
 export_Stimulation <- function(

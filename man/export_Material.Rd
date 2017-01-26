@@ -17,6 +17,26 @@ The function creates a new txt file containing the Material properties.
 \description{
 This function exports a Material as a .Material file.
 }
+\examples{
+example <- default_Material('example')
+file.name <- 'example'
+
+\dontrun{
+export_Material(example, file.name)  # uncomment
+}
+
+# There is now an 'example.TL' and an 'example.OSL' file in the 'working directory'.
+# These file are classical .txt files despite the extensions.
+
+file.TL <- paste(getwd(),'/', file.name,'.TL', sep="")
+print(file.TL)
+# readLines(file.TL)
+
+file.OSL <- paste(getwd(),'/', file.name,'.OSL', sep="")
+print(file.OSL)
+# readLines(file.OSL)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

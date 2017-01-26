@@ -7,6 +7,11 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' material <- default_Material('example')
+#'
+#' plot_Material(material)
+#'
 #' @export plot_Material
 
 plot_Material <- function(

@@ -19,7 +19,7 @@ shinyUI(navbarPage("ShinyLumReader",
                               ),
                               mainPanel(
                                 plotOutput(outputId = "stimulationPlot")
-                              )) 
+                              ))
                    ),
                    tabPanel("Detection unit (PMT)",
                             sidebarLayout(
@@ -42,7 +42,7 @@ shinyUI(navbarPage("ShinyLumReader",
                                 textInput(inputId = "filterStackDescription",
                                           label = "Description",
                                           placeholder = "required"),
-                                
+
                                 numericInput(inputId = "nFilters",
                                              label = "Number of filters (max. 4)",
                                              value = 1,
@@ -68,7 +68,7 @@ shinyUI(navbarPage("ShinyLumReader",
                                 ),
                               mainPanel(
                                 plotOutput(outputId = "readerPlot")
-                              )) 
+                              ))
                             ),
                    tabPanel("Material",
                             sidebarLayout(
@@ -103,16 +103,16 @@ shinyUI(navbarPage("ShinyLumReader",
                    tabPanel("help",
                             div(class="helpPage",
                                 h4("Generalities"),
-                                p("This app is based on the R package 'LumReader' (https://github.com/dstreble/LumReader). 
+                                p("This app is based on the R package 'LumReader' (https://github.com/dstreble/LumReader).
                                   The purpose of this app is to simulate luminescence readers and experiments.
                                   A luminescence reader is composed of 3 elements: a 'stimulation unit', a 'detection unit' and a set of filters, called 'filter stack', to select the signal that reach the detection unit."),
                                 h4("Stimulation Unit"),
                                 p("The first step to simulate your experiment is to define the type of stimulation you want to use.
-                                  Diferent stimulation units are already included in the 'LumReader' package and in the 'shinyLumReader' app. 
+                                  Diferent stimulation units are already included in the 'LumReader' package and in the 'shinyLumReader' app.
                                   The first box allows you to select the origin of your stimulation unit (default= 'LumReader' package, shiny = 'shinyLumReader' app, import = your own source create using the package 'LumReader').
                                   The second box allows you to select the stimulation unit (TL, BSL, IRSL, etc.)."),
                                 h4("Detection Unit"),
-                                p("The second step is to select your detection unit. 
+                                p("The second step is to select your detection unit.
                                   In most of the case it will be a PMT, usually the '9235 QB'. However, for some application, like RTL, it is required to use an other PMT.
                                   Once again you can select a detection unit from the LumReader package or from the shiny app or import your own."),
                                 h4("Filter Stack"),
@@ -124,15 +124,15 @@ shinyUI(navbarPage("ShinyLumReader",
                                   Once you select a filter, you can modify its thickness. It is recommanded to not use filters thiner than their reference thickness.
                                   The first row of figures show the initial properties of the filters (without taking into account the thickness), the second row figure shows the properties of the complete filter stack."),
                                 h4("Reader"),
-                                p("This tab show the detection windows of the reader that you create and compares it to the stimulation signal. 
+                                p("This tab show the detection windows of the reader that you create and compares it to the stimulation signal.
                                   The 2 box allow you to give a name and a description to your reader."),
                                 h4("Material"),
                                 p("A luminescence experiment requires a reader but also a material to analyse.
-                                  This tab allows you to define this material. 
+                                  This tab allows you to define this material.
                                   Once again, you first select the origin of the material to use (package, app or your own) and then the material itself.
                                   Generating a material can take some time and require to combine two files. Therefore you will have to click on the 'Generate' button each time you want to upload a new material.
                                   The 'Level plot' tab contains 2 level plots, one for the TL emission properties of the material and one for its OSL emission properties.
-                                  The 'TL' tab contains a 3d plot of the TL emission properties. 
+                                  The 'TL' tab contains a 3d plot of the TL emission properties.
                                   The 'OSL' tab contains a 3d plot of the OSL emission properties.
                                   The 3D plots of the 'TL' and 'OSL' tabs are created using the R-package 'plotly'.
                                   It is sometimes require to 'refresh' the tab to see them appear.

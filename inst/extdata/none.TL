@@ -1,5 +1,5 @@
 Name: none
-Description:
+Description: none
 TL emission [nm ; °C ; a.u.]:
  200 ; 0  ;  1
  200 ; 10  ;  1

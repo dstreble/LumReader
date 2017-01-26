@@ -13,6 +13,18 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#'
+#' filter
+#'
+#' #create filters
+#' filter1 <- default_Filters('example')[[1]]
+#' filter2 <- default_Filters('example2')[[1]]
+#'
+#' new.filter <- combine_Filters (filter1, filter2)
+#'
+#' plot_Filter(new.filter)
+#'
 #' @export combine_Filters
 
 combine_Filters <- function(

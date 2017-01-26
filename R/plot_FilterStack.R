@@ -7,6 +7,19 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#'
+#' #Data
+#' name <- "example"
+#' description <- "non realistic filterStack"
+#'
+#' filters <- default_Filters(c('example','example2'))
+#'
+#' #Filterstack
+#' filterstack <- create_FilterStack(name,description,filters)
+#'
+#' plot_FilterStack(filterstack)
+#'
 #' @export plot_FilterStack
 
 plot_FilterStack <- function(

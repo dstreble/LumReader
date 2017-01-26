@@ -10,6 +10,21 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' #Create filterStack
+#' name <- "example"
+#' description <- "non realistic filterStack"
+#'
+#' filters <- default_Filters(c('example','example2'))
+#'
+#' filterStack <- create_FilterStack(name, description, filters)
+#'
+#' plot_FilterStack(filterStack)
+#'
+#' #Removal of the 2nd filter
+#' filterStack <- remove_Filter(filterStack, filters[[2]])
+#'
+#' plot_FilterStack(filterStack)
 #'
 #' @export remove_Filter
 

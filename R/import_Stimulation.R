@@ -9,6 +9,17 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' folder <- system.file("extdata", package="LumReader")
+#'
+#' file.name <- 'example' # !!! no extension !!! #
+#'
+#' file <-paste(folder, '/', file.name, sep="")
+#'
+#' example <- import_Stimulation(file)
+#'
+#' plot_Stimulation(example)
+#'
 #' @export import_Stimulation
 
 import_Stimulation <- function(

@@ -13,6 +13,11 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' example <- default_Filters('example')[[1]]
+#'
+#' plot_Filter(example)
+#'
 #' @export default_Filters
 
 default_Filters <- function(

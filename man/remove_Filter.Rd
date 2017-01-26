@@ -14,6 +14,23 @@ remove_Filter(object, filter)
 \description{
 This function removes a filter from a stack
 }
+\examples{
+#Create filterStack
+name <- "example"
+description <- "non realistic filterStack"
+
+filters <- default_Filters(c('example','example2'))
+
+filterStack <- create_FilterStack(name, description, filters)
+
+plot_FilterStack(filterStack)
+
+#Removal of the 2nd filter
+filterStack <- remove_Filter(filterStack, filters[[2]])
+
+plot_FilterStack(filterStack)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

@@ -12,6 +12,12 @@ plot_Filter(object)
 \description{
 This function plots the selected filter.
 }
+\examples{
+filters <- default_Filters(c('example', 'example2'))
+
+plot_Filter(filters[[1]])
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

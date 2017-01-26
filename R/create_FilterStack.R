@@ -14,6 +14,18 @@
 #' @return
 #'  This function return a new filter stack.
 #'
+#' @examples
+#' #Data
+#' name <- "example"
+#' description <- "non realistic filterStack"
+#'
+#' filters <- default_Filters(c('example','example2'))
+#'
+#' #Filterstack
+#' filterstack <- create_FilterStack(name,description,filters)
+#'
+#' plot_FilterStack(filterstack)
+#'
 #' @author David Strebler, University of Cologne (Germany).
 #'
 #' @export create_FilterStack

@@ -12,6 +12,12 @@ plot_PMT(object)
 \description{
 This function plots the selected PMT.
 }
+\examples{
+PMT <- default_PMT('example')
+
+plot_PMT(PMT)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

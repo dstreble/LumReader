@@ -12,6 +12,21 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' example <- default_PMT('example')
+#' file.name <- 'example'
+#'
+#' \dontrun{
+#' export_PMT(example, file.name)  # uncomment
+#' }
+#'
+#' # There is now an 'example.PMT' file in the 'working directory'.
+#' # This file is a classical .txt file despite the extension.
+#'
+#' file <- paste(getwd(),'/', file.name,'.PMT', sep="")
+#' print(file)
+#' # readLines(file)
+#'
 #' @export export_PMT
 
 export_PMT <- function(

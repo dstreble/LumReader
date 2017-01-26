@@ -12,6 +12,25 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' example <- default_Material('example')
+#' file.name <- 'example'
+#'
+#' \dontrun{
+#' export_Material(example, file.name)  # uncomment
+#' }
+#'
+#' # There is now an 'example.TL' and an 'example.OSL' file in the 'working directory'.
+#' # These file are classical .txt files despite the extensions.
+#'
+#' file.TL <- paste(getwd(),'/', file.name,'.TL', sep="")
+#' print(file.TL)
+#' # readLines(file.TL)
+#'
+#' file.OSL <- paste(getwd(),'/', file.name,'.OSL', sep="")
+#' print(file.OSL)
+#' # readLines(file.OSL)
+#'
 #' @export export_Material
 
 export_Material <- function(

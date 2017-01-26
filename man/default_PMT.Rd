@@ -15,6 +15,12 @@ This function return a list containing the PMT included in the package.
 \description{
 This fonction generates a list containing the PMT included in the packages
 }
+\examples{
+example <- default_PMT('example')
+
+plot_PMT(example)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

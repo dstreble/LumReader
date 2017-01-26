@@ -17,6 +17,19 @@ The function creates a new \code{\linkS4class{Filter}} object.
 \description{
 This function creates a new filter out of 2 filters.
 }
+\examples{
+
+filter
+
+#create filters
+filter1 <- default_Filters('example')[[1]]
+filter2 <- default_Filters('example2')[[1]]
+
+new.filter <- combine_Filters (filter1, filter2)
+
+plot_Filter(new.filter)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

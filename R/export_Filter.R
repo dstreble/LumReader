@@ -12,6 +12,22 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' example <- default_Filters('example')[[1]]
+#' file.name <- 'example'
+#'
+#' \dontrun{
+#' export_Filter(example, file.name)  # uncomment
+#' }
+#'
+#' # There is now an 'example.FLT' file in the 'working directory'.
+#' # This file is a classical .txt file despite the extension.
+#'
+#' file <- paste(getwd(),'/', file.name,'.FLT', sep="")
+#' print(file)
+#' # readLines(file)
+#'
+#'
 #' @export export_Filter
 
 export_Filter <- function(

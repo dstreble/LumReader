@@ -68,7 +68,7 @@ setMethod(f = "show",
             }
 
             if(!is.null(object@material)){
-              cat("material:", object@material@name, "(",object@material@description, ")","\n")
+              cat("material:", object@material@name, "(TL:",object@material@description.TL, 'OSL:', object@material@description.OSL,")","\n")
             }else{
               cat("no Filters in the stack. \n")
             }
@@ -94,7 +94,7 @@ setMethod(f = "show",
             if(!is.null(object@emission)){
               cat("Emission [nm ; a.u.]:", "\n")
               cat("\t ...from:", min(object@emission@emission[,1]), "to", max(object@emission@emission[,1]), "[nm]. \n")
-              cat("\t ...between:", min(object@emission@emission[,2]), "and", max(object@emissiont@emission[,2]), "[a.u]. \n")
+              cat("\t ...between:", min(object@emission@emission[,2]), "and", max(object@emission@emission[,2]), "[a.u]. \n")
             }
           })
 

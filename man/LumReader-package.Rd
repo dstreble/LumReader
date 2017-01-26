@@ -6,16 +6,16 @@
 \alias{LumReader-package}
 \title{Tools to simulate a TL/OSL Reader}
 \description{
-A series of function to estimate the detection windows of a TL/OSL reader based on the filters and the PMT selected.
-It also allows to check if the stimulation unit do not overlap with this detection windows.
-Finally, for those only interested by filter combination, it could provide the transmission property of a filter stack.
-The user can used the filters, PMT and stimulation unit already includes in the package or creates its own.
+A series of functions to estimate the detection windows of a luminescence reader based on the filters and the photomultiplier (PMT) selected.
+These functions also allow to simulate a luminescence experiment based on the thermoluminesce (TL) or the optically stimulated luminescence (OSL) properties of a material.
+For those only interested by filter combination, the package can provide the transmission property of a filter stack.
+The user can used the filters, detection units, stimulation units and materials already included in the package or creates its own.
 }
 \details{
 \tabular{ll}{  Package: \tab TLdating \cr
                Type: \tab Package\cr
                Version: \tab 0.1.0 \cr
-               Date: \tab 2016-03-01 \cr
+               Date: \tab 2017-01-25 \cr
                License: \tab GPL-3
             }
 }

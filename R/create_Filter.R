@@ -23,6 +23,33 @@
 #' @return
 #'  This function return a new filter.
 #'
+#' @examples
+#' #Data
+#' wavelength <- seq(200,1000,10)
+#'
+#' values <- dnorm(x = wavelength,mean = 400,sd = 50)*dnorm(x = wavelength,mean = 200,sd = 50)
+#' values <- values/max(values)
+#'
+#' name <- "example"
+#' description <- "non realistic filter"
+#' reference.thickness <- 1
+#' reflexion <- 1
+#' transmission <- matrix(data=c(wavelength,
+#'                               values),
+#'                        nrow = 81,
+#'                        ncol = 2,
+#'                        byrow = FALSE)
+#'
+#' #Filter
+#' filter <- create_Filter(name = name,
+#'                         description = description,
+#'                         reference.thickness = reference.thickness,
+#'                         reflexion = reflexion,
+#'                         transmission = transmission)
+#'
+#' plot_Filter(filter)
+#'
+#'
 #' @author David Strebler, University of Cologne (Germany).
 #'
 #' @export create_Filter

@@ -20,6 +20,22 @@
 #' @return
 #'  This function return a new Reader.
 #'
+#' @examples
+#' # Data
+#' name <- 'example'
+#' description <- 'example'
+#'
+#' # Create reader components
+#' filter <- default_Filters('example')
+#' filterStack <- create_FilterStack(name, description, filter)
+#' stimulation <- default_Stimulation('example')
+#' PMT <- default_PMT('example')
+#'
+# Create reader
+#' reader <- create_Reader(name, description, stimulation, filterStack, PMT)
+#'
+#' plot_Reader(reader)
+#'
 #' @author David Strebler, University of Cologne (Germany).
 #'
 #' @export create_Reader

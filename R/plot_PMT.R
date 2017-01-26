@@ -7,6 +7,10 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' PMT <- default_PMT('example')
+#'
+#' plot_PMT(PMT)
 #'
 #' @export plot_PMT
 

@@ -12,6 +12,12 @@ plot_Material(object)
 \description{
 This function plots the selected Material.
 }
+\examples{
+material <- default_Material('example')
+
+plot_Material(material)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

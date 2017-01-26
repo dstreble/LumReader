@@ -14,6 +14,26 @@ add_Filter(object, filter)
 \description{
 This function adds a filter to a stack
 }
+\examples{
+#create filters
+filter1 <- default_Filters('example')[[1]]
+filter2 <- default_Filters('example2')[[1]]
+
+#Create filterStack
+name <- "example"
+description <- "non realistic filterStack"
+
+filters <- list(filter1)
+filterStack <- create_FilterStack(name, description, filters)
+
+plot_FilterStack(filterStack)
+
+#add_Filter
+filterStack <- add_Filter(filterStack, filter2)
+
+plot_FilterStack(filterStack)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

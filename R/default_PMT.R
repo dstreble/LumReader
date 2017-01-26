@@ -8,6 +8,11 @@
 #' @return
 #' This function return a list containing the PMT included in the package.
 #'
+#' @examples
+#' example <- default_PMT('example')
+#'
+#' plot_PMT(example)
+#'
 #' @author David Strebler, University of Cologne (Germany).
 #'
 #' @export default_PMT

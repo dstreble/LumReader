@@ -15,6 +15,12 @@ This function return a list containing the Material included in the package.
 \description{
 This fonction generates a list containing the Material included in the packages
 }
+\examples{
+example <- default_Material('example')
+
+plot_Material(example)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

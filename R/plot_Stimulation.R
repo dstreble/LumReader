@@ -7,6 +7,11 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' stimulation <- default_Stimulation('example')
+#'
+#' plot_Stimulation(stimulation)
+#'
 #'
 #' @export plot_Stimulation
 

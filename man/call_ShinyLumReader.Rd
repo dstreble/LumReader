@@ -2,12 +2,17 @@
 % Please edit documentation in R/call_ShinyLumReader.R
 \name{call_ShinyLumReader}
 \alias{call_ShinyLumReader}
-\title{Shiny app'}
+\title{ShinyLumReader application}
 \usage{
 call_ShinyLumReader()
 }
 \description{
 This function calls the 'shinyLumReader' application.
+}
+\examples{
+\dontrun{
+call_ShinyLumReader()
+}
 }
 \author{
 David Strebler, University of Cologne (Germany).

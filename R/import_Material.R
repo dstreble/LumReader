@@ -9,6 +9,17 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' folder <- system.file("extdata", package="LumReader")
+#'
+#' file.name <- 'example' # !!! no extension !!! #
+#'
+#' file <-paste(folder, '/', file.name, sep="")
+#'
+#' example <- import_Material(file)
+#'
+#' plot_Material(example)
+#'
 #' @export import_Material
 
 import_Material <- function(

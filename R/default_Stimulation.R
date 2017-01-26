@@ -10,6 +10,11 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' example <- default_Stimulation('example')
+#'
+#' plot_Stimulation(example)
+#'
 #' @export default_Stimulation
 
 default_Stimulation <- function(

@@ -20,6 +20,74 @@
 #' @return
 #'  This function return a new Material.
 #'
+#' @examples
+#' #Data
+#' name <- "example"
+#'
+#' # TL
+#' description.TL <- "example"
+#'
+#' TL.wavelength <- seq(200,1000,10)
+#' TL.temperatures <- seq(0,800,10)
+#'
+#' # TL peak
+#' TL.peak.x <- dnorm(TL.wavelength,400,50)
+#' TL.peak.x <- rep(TL.peak.x,each=length(TL.temperatures))
+#'
+#' TL.peak.x <- TL.peak.x/max(TL.peak.x)
+#'
+#' TL.peak.y <- dnorm(TL.temperatures,400,25)
+#' TL.peak.y <- rep(TL.peak.y,times=length(TL.wavelength))
+#' TL.peak.y <- TL.peak.y/max(TL.peak.y)
+#'
+#' TL.signal <- TL.peak.x*TL.peak.y
+#'
+#' TL <- matrix(data=c(rep(TL.wavelength,
+#'                         each=length(TL.temperatures)),
+#'                     rep(TL.temperatures,
+#'                         times=length(TL.wavelength)),
+#'                     TL.signal),
+#'              nrow = length(TL.signal),
+#'              ncol = 3,
+#'              byrow = FALSE)
+#'
+#' # OSL
+#' description.OSL <- "example"
+#'
+#' OSL.wavelength <- seq(200,1000,10)
+#' OSL.color <- seq(200,1000,10)
+#'
+#' OSL.peak.x <- dnorm(OSL.wavelength,300,100)
+#' OSL.peak.x <- rep(OSL.peak.x,each=length(OSL.color))
+#'
+#' OSL.peak.x <- OSL.peak.x/max(OSL.peak.x)
+#'
+#' OSL.peak.y <- dnorm(OSL.color,500,50)
+#' OSL.peak.y <- rep(OSL.peak.y,times=length(OSL.wavelength))
+#' OSL.peak.y <- OSL.peak.y/max(OSL.peak.y)
+#'
+#' OSL.signal <- OSL.peak.x*OSL.peak.y
+#'
+#'
+#' OSL <- matrix(data=c(rep(OSL.wavelength,
+#'                          each=length(OSL.color)),
+#'                      rep(OSL.color,
+#'                          times=length(OSL.wavelength)),
+#'                      OSL.signal),
+#'               nrow = length(OSL.signal),
+#'               ncol = 3,
+#'               byrow = FALSE)
+#'
+#' # Material
+#'
+#' material <- create_Material(name = name,
+#'                             description.TL = description.TL,
+#'                             TL = TL,
+#'                             description.OSL = description.OSL,
+#'                             OSL = OSL)
+#'
+#' plot_Material(material)
+#'
 #' @author David Strebler, University of Cologne (Germany).
 #'
 #' @export create_Material

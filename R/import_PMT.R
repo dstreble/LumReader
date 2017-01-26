@@ -9,6 +9,17 @@
 #'
 #' @author David Strebler, University of Cologne (Germany).
 #'
+#' @examples
+#' folder <- system.file("extdata", package="LumReader")
+#'
+#' file.name <- 'example' # !!! no extension !!! #
+#'
+#' file <-paste(folder, '/', file.name, sep="")
+#'
+#' example <- import_PMT(file)
+#'
+#' plot_PMT(example)
+#'
 #' @export import_PMT
 
 import_PMT <- function(

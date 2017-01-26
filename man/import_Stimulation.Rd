@@ -15,6 +15,18 @@ The function creates a new \code{\linkS4class{Stimulation}} object.
 \description{
 This function import the properties of a Stimulation previously saved in a .EXI file.
 }
+\examples{
+folder <- system.file("extdata", package="LumReader")
+
+file.name <- 'example' # !!! no extension !!! #
+
+file <-paste(folder, '/', file.name, sep="")
+
+example <- import_Stimulation(file)
+
+plot_Stimulation(example)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

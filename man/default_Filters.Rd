@@ -17,6 +17,12 @@ This function return a list containing the filters included in the package.
 \description{
 This fonction generates a list containing the filters included in the packages
 }
+\examples{
+example <- default_Filters('example')[[1]]
+
+plot_Filter(example)
+
+}
 \author{
 David Strebler, University of Cologne (Germany).
 }

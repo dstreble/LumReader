@@ -15,6 +15,29 @@
 #' @return
 #'  This function return a new PMT.
 #'
+#' @examples
+#' # Data
+#' name <- "example"
+#' description <- "non realistic PMT"
+#'
+#' wavelength <- seq(200,1000,10)
+#'
+#' values <- dnorm(x = wavelength,mean = 300,sd = 150)
+#' values <- values/max(values)
+#'
+#' efficiency <- matrix(data=c(wavelength,
+#'                             values),
+#'                      nrow = 81,
+#'                      ncol = 2,
+#'                      byrow = FALSE)
+#'
+#' #PMT
+#' PMT <- create_PMT(name = name,
+#'                   description = description,
+#'                   efficiency = efficiency)
+#'
+#' plot_PMT(PMT)
+#'
 #' @author David Strebler, University of Cologne (Germany).
 #'
 #' @export create_PMT
